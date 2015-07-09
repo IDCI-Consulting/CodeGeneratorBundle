@@ -1,0 +1,28 @@
+{
+  "name": "idci/code-generator-bundle",
+  "type": "symfony-bundle",
+  "description": "Symfony CodeGeneratorBundle",
+  "keywords": ["code", "generator", "application", "json"],
+  "license": "GPL-3.0+",
+  "authors": [
+    {
+      "name": "Gabriel Bondaz",
+      "email": "gabriel.bondaz@idci-consulting.fr",
+      "homepage": "http://www.idci-consulting.fr"
+    },
+    {
+      "name": "Baptiste Bouchereau",
+      "email": "baptiste.bouchereau@idci-consulting.fr",
+      "homepage": "http://www.idci-consulting.fr"
+    }
+  ],
+  "require": {
+    "php": ">=5.3.3",
+    "symfony/framework-bundle":">=2.3"
+  },
+  "autoload": {
+    "psr-0": { "IDCI\\Bundle\\CodeGeneratorBundle\\": "" }
+  },
+  "target-dir": "IDCI/Bundle/CodeGeneratorBundle",
+  "minimum-stability": "dev"
+}
