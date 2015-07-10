@@ -49,10 +49,13 @@ class GenerationConfiguration
      * Set minLength
      *
      * @param int $minLength
+     * @return GenerationConfiguration
      */
     public function setMinLength($minLength)
     {
         $this->minLength = $minLength;
+
+        return $this;
     }
 
     /**Get maxLength
@@ -68,10 +71,13 @@ class GenerationConfiguration
      * Set maxLength
      *
      * @param int $maxLength
+     * @return GenerationConfiguration
      */
     public function setMaxLength($maxLength)
     {
         $this->maxLength = $maxLength;
+
+        return $this;
     }
 
     /**
@@ -88,10 +94,13 @@ class GenerationConfiguration
      * Set includedCharacterSets
      *
      * @param GenerationConfigurationIncludedCharacterSets $includedCharacterSets
+     * @return GenerationConfiguration
      */
     public function setIncludedCharacterSets($includedCharacterSets)
     {
         $this->includedCharacterSets = $includedCharacterSets;
+
+        return $this;
     }
 
     /**
@@ -108,10 +117,13 @@ class GenerationConfiguration
      * Set excludedCharacterSets
      *
      * @param array $excludedCharacterSets
+     * @return GenerationConfiguration
      */
     public function setExcludedCharacterSets($excludedCharacterSets)
     {
         $this->excludedCharacterSets = $excludedCharacterSets;
+
+        return $this;
     }
 
     /**
@@ -128,9 +140,12 @@ class GenerationConfiguration
      * Set quantity
      *
      * @param int $quantity
+     * @return GenerationConfiguration
      */
     public function setQuantity($quantity)
     {
         $this->quantity = $quantity;
+
+        return $this;
     }
 }

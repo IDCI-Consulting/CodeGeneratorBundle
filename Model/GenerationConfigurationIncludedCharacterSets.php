@@ -80,10 +80,13 @@ class GenerationConfigurationIncludedCharacterSets
      * Set lowercase
      *
      * @param boolean $lowercase
+     * @return GenerationConfigurationIncludedCharacterSets
      */
     public function setLowercase($lowercase)
     {
         $this->lowercase = $lowercase;
+
+        return $this;
     }
 
     /**
@@ -100,10 +103,13 @@ class GenerationConfigurationIncludedCharacterSets
      * Set uppercase
      *
      * @param boolean $uppercase
+     * @return GenerationConfigurationIncludedCharacterSets
      */
     public function setUppercase($uppercase)
     {
         $this->uppercase = $uppercase;
+
+        return $this;
     }
 
     /**
@@ -120,10 +126,13 @@ class GenerationConfigurationIncludedCharacterSets
      * Set digits
      *
      * @param boolean $digits
+     * @return GenerationConfigurationIncludedCharacterSets
      */
     public function setDigits($digits)
     {
         $this->digits = $digits;
+
+        return $this;
     }
 
     /**
@@ -140,10 +149,13 @@ class GenerationConfigurationIncludedCharacterSets
      * Set punctuation
      *
      * @param boolean $punctuation
+     * @return GenerationConfigurationIncludedCharacterSets
      */
     public function setPunctuation($punctuation)
     {
         $this->punctuation = $punctuation;
+
+        return $this;
     }
 
     /**
@@ -160,10 +172,13 @@ class GenerationConfigurationIncludedCharacterSets
      * Set brackets
      *
      * @param boolean $brackets
+     * @return GenerationConfigurationIncludedCharacterSets
      */
     public function setBrackets($brackets)
     {
         $this->brackets = $brackets;
+
+        return $this;
     }
 
     /**
@@ -180,10 +195,13 @@ class GenerationConfigurationIncludedCharacterSets
      * Set space
      *
      * @param boolean $space
+     * @return GenerationConfigurationIncludedCharacterSets
      */
     public function setSpace($space)
     {
         $this->space = $space;
+
+        return $this;
     }
 
     /**
@@ -200,10 +218,13 @@ class GenerationConfigurationIncludedCharacterSets
      * Set specialCharacters
      *
      * @param boolean $specialCharacters
+     * @return GenerationConfigurationIncludedCharacterSets
      */
     public function setSpecialCharacters($specialCharacters)
     {
         $this->specialCharacters = $specialCharacters;
+
+        return $this;
     }
 
     /**
@@ -220,10 +241,13 @@ class GenerationConfigurationIncludedCharacterSets
      * Set extraCharacters
      *
      * @param array $extraCharacters
+     * @return GenerationConfigurationIncludedCharacterSets
      */
     public function setExtraCharacters($extraCharacters)
     {
         $this->extraCharacters = $extraCharacters;
+
+        return $this;
     }
 
 
