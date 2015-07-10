@@ -20,7 +20,7 @@ class CodeGeneratorRegistry implements CodeGeneratorRegistryInterface
     /**
      * {@inheritDoc}
      */
-    public function setCodeGenerator($alias, CodeGeneratorInterface $type)
+    public function setCodeGenerator(CodeGeneratorInterface $type, $alias)
     {
         $this->codeGenerators[$alias] = $type;
         return $this;

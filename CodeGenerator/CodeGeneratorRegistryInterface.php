@@ -11,16 +11,6 @@ namespace IDCI\Bundle\CodeGeneratorBundle\CodeGenerator;
 interface CodeGeneratorRegistryInterface
 {
     /**
-     * Sets an code generator identify by a alias.
-     *
-     * @param string                 $alias         The code generator alias.
-     * @param CodeGeneratorInterface $codeGenerator The code generator.
-     *
-     * @return CodeGeneratorRegistryInterface
-     */
-    public function setCodeGenerator($alias, CodeGeneratorInterface $codeGenerator);
-
-    /**
      * Returns code generators.
      *
      * @return array
@@ -28,11 +18,21 @@ interface CodeGeneratorRegistryInterface
     public function getCodeGenerators();
 
     /**
+     * Sets an code generator identify by a alias.
+     *
+     * @param CodeGeneratorInterface $codeGenerator The code generator.
+     * @param string                 $alias         The code generator alias.
+     *
+     * @return CodeGeneratorRegistryInterface
+     */
+    public function setCodeGenerator(CodeGeneratorInterface $codeGenerator, $alias);
+
+    /**
      * Returns an code generator by alias.
      *
      * @param string $alias The code generator alias.
      *
-     * @return CodeGeneratorRegistryInterface
+     * @return CodeGeneratorInterface
      *
      * @throws \IDCI\Bundle\CodeGeneratorBundle\Exception\UnexpectedTypeException if the passed alias is not a string.
      * @throws \InvalidArgumentException if the code generator can not be retrieved.

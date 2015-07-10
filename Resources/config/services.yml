@@ -10,7 +10,21 @@ services:
         class: IDCI\Bundle\CodeGeneratorBundle\CodeConfigurator\CodeConfiguratorBuilder
         arguments: [%idci_code_generator.charsets%]
 
-    code_generator.mt_rand:
+    idci.code_generator_manager:
+        class: IDCI\Bundle\CodeGeneratorBundle\CodeGeneratorManager
+        arguments:
+            - @idci_code_generator.code_generator_registry
+            - @idci_code_generator.code_validator_registry
+            - @idci.code_configurator_builder
+
+    # code generators
+    idci.code_generator.mt_rand:
         class: IDCI\Bundle\CodeGeneratorBundle\CodeGenerator\MtRandCodeGenerator
         tags:
             - { name: code_generator, alias: code_generator_mtrand }
+
+    # code validators
+    idci.code_validator.mongo:
+        class: IDCI\Bundle\CodeGeneratorBundle\CodeGenerator\MongoCodeValidator
+        tags:
+            - { name: code_validator, alias: code_validator_mongo }

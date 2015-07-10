@@ -8,13 +8,14 @@
 
 namespace IDCI\Bundle\CodeGeneratorBundle\CodeGenerator;
 
-interface CodeValidatorInterface
+class MongoCodeValidator implements CodeValidatorInterface
 {
     /**
-     * Validate generated codes
-     *
-     * @param array() $codes
-     * @return mixed : the false codes if any, else true
+     * {@inheritdoc}
      */
-    public function validate(array $codes);
+    public function validate(array $codes)
+    {
+        // TODO
+        return true;
+    }
 }

@@ -15,12 +15,12 @@ interface CodeValidatorRegistryInterface
     /**
      * Sets an code Validator identify by a alias.
      *
-     * @param string                 $alias         The code Validator alias.
      * @param CodeValidatorInterface $codeValidator The code Validator.
+     * @param string                 $alias         The code Validator alias.
      *
      * @return CodeValidatorRegistryInterface
      */
-    public function setCodeValidator($alias, CodeValidatorInterface $codeValidator);
+    public function setCodeValidator(CodeValidatorInterface $codeValidator, $alias);
 
     /**
      * Returns code Validators.
@@ -34,7 +34,7 @@ interface CodeValidatorRegistryInterface
      *
      * @param string $alias The code Validator alias.
      *
-     * @return CodeValidatorRegistryInterface
+     * @return CodeValidatorInterface
      *
      * @throws \IDCI\Bundle\CodeGeneratorBundle\Exception\UnexpectedTypeException if the passed alias is not a string.
      * @throws \InvalidArgumentException if the code Validator can not be retrieved.
