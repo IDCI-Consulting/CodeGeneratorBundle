@@ -8,13 +8,21 @@
 
 namespace IDCI\Bundle\CodeGeneratorBundle\CodeGenerator;
 
-interface CodeValidatorInterface
+class ArrayCodeValidator implements CodeValidatorInterface
 {
     /**
      * Validate a code
      *
      * @param string $code
+     * @param mixed $codes
      * @return boolean
      */
-    public function validate($code);
+    public function validate($code, $codes = null) {
+
+        if (in_array($code, $codes)) {
+            return false;
+        }
+
+        return true;
+    }
 }
