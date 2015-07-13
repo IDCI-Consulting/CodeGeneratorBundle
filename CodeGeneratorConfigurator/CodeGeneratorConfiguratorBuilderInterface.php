@@ -6,7 +6,7 @@
  * @license: MIT
  */
 
-namespace IDCI\Bundle\CodeGeneratorBundle\CodeGenerator;
+namespace IDCI\Bundle\CodeGeneratorBundle\CodeGeneratorConfigurator;
 
 use IDCI\Bundle\CodeGeneratorBundle\Model\GenerationConfiguration;
 
