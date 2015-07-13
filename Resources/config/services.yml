@@ -7,8 +7,8 @@ services:
         class: IDCI\Bundle\CodeGeneratorBundle\CodeValidator\CodeValidatorRegistry
 
     idci.code_configurator_builder:
-        class: IDCI\Bundle\CodeGeneratorBundle\CodeConfigurator\CodeConfiguratorBuilder
-        arguments: [%idci_code_generator.charsets%]
+        class: IDCI\Bundle\CodeGeneratorBundle\CodeGeneratorConfigurator\CodeGeneratorConfiguratorBuilder
+        arguments: [%codeGeneratorConfiguration%]
 
     idci.code_generator_manager:
         class: IDCI\Bundle\CodeGeneratorBundle\CodeGeneratorManager
