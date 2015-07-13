@@ -8,13 +8,15 @@
 
 namespace IDCI\Bundle\CodeGeneratorBundle\CodeGenerator;
 
+use IDCI\Bundle\CodeGeneratorBundle\CodeGeneratorConfigurator\CodeGeneratorConfigurator;
+
 interface CodeGeneratorInterface
 {
     /**
      * Generate codes according to the given configuration
      *
-     * @param CodeGeneratorConfiguratorInterface $configurator
-     * @return array()
+     * @param CodeGeneratorConfigurator $configurator
+     * @return string
      */
-    public function generate(CodeGeneratorConfiguratorInterface $configurator);
+    public function generate(CodeGeneratorConfigurator $configurator);
 }

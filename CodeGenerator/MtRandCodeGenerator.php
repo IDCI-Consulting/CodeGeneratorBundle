@@ -8,20 +8,23 @@
 
 namespace IDCI\Bundle\CodeGeneratorBundle\CodeGenerator;
 
+use IDCI\Bundle\CodeGeneratorBundle\CodeGeneratorConfigurator\CodeGeneratorConfigurator;
+
 class MtRandCodeGenerator implements CodeGeneratorInterface
 {
     /**
      * {@inheritDoc}
      */
-    public function generate(CodeGeneratorConfiguratorInterface $configurator)
+    public function generate(CodeGeneratorConfigurator $configurator)
     {
-        for($i = 1; $i <= $configuration->getQuantity(); $i++) {
-            $stringLength = strlen($string);
-            $code = '';
-            for ($u = 1; $u <= $codeLength; $u++) {
-                $nb = mt_rand(0, ($stringLength - 1));
-                $code .= $string[$nb];
-            }
+        $chartsetString = $configurator->getFullCharactersSet();
+        $stringLength = strlen($chartsetString);
+        $code = '';
+        for ($codeLength = 1; $codeLength <= $configurator->getRandomLength(); $codeLength++) {
+            $nb = mt_rand(0, ($stringLength - 1));
+            $code = sprintf("%s%s", $code, $chartsetString[$nb]);
         }
+
+        return $code;
     }
 }
