@@ -8,11 +8,13 @@
 
 namespace IDCI\Bundle\CodeGeneratorBundle\Service;
 
+use IDCI\Bundle\CodeGeneratorBundle\CodeGenerator\ArrayCodeValidator;
 use IDCI\Bundle\CodeGeneratorBundle\CodeGenerator\CodeGeneratorConfiguratorBuilder;
 use IDCI\Bundle\CodeGeneratorBundle\CodeGenerator\CodeGeneratorRegistry;
 use IDCI\Bundle\CodeGeneratorBundle\CodeGenerator\CodeValidatorInterface;
 use IDCI\Bundle\CodeGeneratorBundle\CodeGeneratorConfigurator\CodeGeneratorConfigurator;
 use IDCI\Bundle\CodeGeneratorBundle\CodeValidator\CodeValidatorRegistry;
+use IDCI\Bundle\CodeGeneratorBundle\Exception\InvalidQuantityException;
 use IDCI\Bundle\CodeGeneratorBundle\Model\GenerationConfiguration;
 
 class CodeGeneratorManager
@@ -68,29 +70,33 @@ class CodeGeneratorManager
         ;
 
         if ($configurator->getQuantity() > $configurator->getMaxQuantity()) {
-            throw new \Exception(sprintf(
-                'It\'s impossible to generate %d codes. Maximum value is %d',
+            throw new InvalidQuantityException(
                 $configurator->getQuantity(),
                 $configurator->getMaxQuantity()
-            ));
+            );
         }
 
-        // generates the codes
-        $codes = $this
-            ->codeGeneratorRegistry
-            ->getCodeGenerator($alias)
-            ->generate($configurator)
-        ;
+        $codes = array();
+        while (count($codes) < $configurator->getQuantity()) {
 
-        // validates the codes
-        /**
-         * @var $validators CodeValidatorInterface[]
-         */
-        $validators = $this->codeValidatorRegistry->getCodeValidators();
-        foreach ($validators as $validator) {
-            $errorCodes = $validator->validate($codes);
-            if (is_array($errorCodes)) {
-                throw new \Exception('Some codes are not valid');
+            // generates the code
+            $code = $this
+                ->codeGeneratorRegistry
+                ->getCodeGenerator($alias)
+                ->generate($configurator)
+            ;
+
+            // validate the code
+            $validators = $this->codeValidatorRegistry->getCodeValidators();
+            foreach ($validators as $validator) {
+                if ($validator instanceof ArrayCodeValidator) {
+                    $success = $validator->validate($code, $codes);
+                } else {
+                    $success = $validator->validate($code);
+                }
+                if ($success) {
+                    $codes[] = $code;
+                }
             }
         }
 
