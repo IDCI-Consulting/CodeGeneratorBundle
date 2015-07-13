@@ -6,7 +6,7 @@
  * @license: MIT
  */
 
-namespace IDCI\Bundle\CodeGeneratorBundle\Service;
+namespace IDCI\Bundle\CodeGeneratorBundle;
 
 use IDCI\Bundle\CodeGeneratorBundle\CodeGenerator\ArrayCodeValidator;
 use IDCI\Bundle\CodeGeneratorBundle\CodeGenerator\CodeGeneratorConfiguratorBuilder;
