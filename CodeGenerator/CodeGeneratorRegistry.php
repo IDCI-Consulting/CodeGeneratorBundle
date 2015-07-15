@@ -23,6 +23,7 @@ class CodeGeneratorRegistry implements CodeGeneratorRegistryInterface
     public function setCodeGenerator(CodeGeneratorInterface $codeGenerator, $alias)
     {
         $this->codeGenerators[$alias] = $codeGenerator;
+
         return $this;
     }
 
