@@ -31,6 +31,6 @@ class IDCICodeGeneratorExtension extends Extension
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
 
-        $container->setParameter('codeGeneratorConfiguration', $config);
+        $container->setParameter('idci_code_generator.charsets', $config['charsets']);
     }
 }

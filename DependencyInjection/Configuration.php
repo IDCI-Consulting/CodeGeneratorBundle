@@ -27,16 +27,17 @@ class Configuration implements ConfigurationInterface
         $rootNode = $treeBuilder->root('idci_code_generator');
 
         $rootNode
+            ->addDefaultsIfNotSet()
             ->children()
                 ->arrayNode('charsets')
                     ->children()
-                        ->scalarNode('uppercase')->defaultValue('ABCDEFGHIJKLMNOPQRSTUVWXYZ')->end()
-                        ->scalarNode('lowercase')->defaultValue('abcdefghijklmnopqrstuvwxyz')->end()
-                        ->scalarNode('digits')->defaultValue('0123456789')->end()
-                        ->scalarNode('punctuation')->defaultValue(',?!:;.')->end()
-                        ->scalarNode('brackets')->defaultValue('{}[]()')->end()
-                        ->scalarNode('space')->defaultValue(' ')->end()
-                        ->scalarNode('specialCharacters')->end()
+                        ->scalarNode('uppercase')->defaultValue('ABCDEFGHIJKLMNOPQRSTUVWXYZ')->cannotBeEmpty()->end()
+                        ->scalarNode('lowercase')->defaultValue('abcdefghijklmnopqrstuvwxyz')->cannotBeEmpty()->end()
+                        ->scalarNode('digits')->defaultValue('0123456789')->cannotBeEmpty()->end()
+                        ->scalarNode('punctuation')->defaultValue(',?!:;.')->cannotBeEmpty()->end()
+                        ->scalarNode('brackets')->defaultValue('{}[]()')->cannotBeEmpty()->end()
+                        ->scalarNode('space')->defaultValue(' ')->cannotBeEmpty()->end()
+                        ->scalarNode('special_characters')->cannotBeEmpty()->end()
                     ->end()
             ->end()
         ;
