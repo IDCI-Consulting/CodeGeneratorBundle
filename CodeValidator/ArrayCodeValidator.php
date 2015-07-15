@@ -6,7 +6,7 @@
  * @license: MIT
  */
 
-namespace IDCI\Bundle\CodeGeneratorBundle\CodeGenerator;
+namespace IDCI\Bundle\CodeGeneratorBundle\CodeValidator;
 
 class ArrayCodeValidator implements CodeValidatorInterface
 {

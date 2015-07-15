@@ -8,10 +8,10 @@
 
 namespace IDCI\Bundle\CodeGeneratorBundle;
 
-use IDCI\Bundle\CodeGeneratorBundle\CodeGenerator\ArrayCodeValidator;
 use IDCI\Bundle\CodeGeneratorBundle\CodeGeneratorConfigurator\CodeGeneratorConfiguratorBuilder;
 use IDCI\Bundle\CodeGeneratorBundle\CodeGenerator\CodeGeneratorRegistry;
 use IDCI\Bundle\CodeGeneratorBundle\CodeGeneratorConfigurator\CodeGeneratorConfigurator;
+use IDCI\Bundle\CodeGeneratorBundle\CodeValidator\ArrayCodeValidator;
 use IDCI\Bundle\CodeGeneratorBundle\CodeValidator\CodeValidatorRegistry;
 use IDCI\Bundle\CodeGeneratorBundle\Exception\InvalidQuantityException;
 use IDCI\Bundle\CodeGeneratorBundle\Model\GenerationConfiguration;

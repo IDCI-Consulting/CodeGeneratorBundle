@@ -8,8 +8,6 @@
 
 namespace IDCI\Bundle\CodeGeneratorBundle\CodeValidator;
 
-use IDCI\Bundle\CodeGeneratorBundle\CodeGenerator\CodeValidatorInterface;
-
 interface CodeValidatorRegistryInterface
 {
     /**

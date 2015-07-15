@@ -24,7 +24,7 @@ services:
             - { name: code_generator, alias: code_generator_mtrand }
 
     # code validators
-    idci.code_validator.mongo:
-        class: IDCI\Bundle\CodeGeneratorBundle\CodeGenerator\MongoCodeValidator
+    idci.code_validator.array:
+        class: IDCI\Bundle\CodeGeneratorBundle\CodeValidator\ArrayCodeValidator
         tags:
             - { name: code_validator, alias: code_validator_mongo }

@@ -8,7 +8,6 @@
 
 namespace IDCI\Bundle\CodeGeneratorBundle\CodeValidator;
 
-use IDCI\Bundle\CodeGeneratorBundle\CodeGenerator\CodeValidatorInterface;
 use IDCI\Bundle\CodeGeneratorBundle\Exception\UnexpectedTypeException;
 
 class CodeValidatorRegistry implements CodeValidatorRegistryInterface
