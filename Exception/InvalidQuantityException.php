@@ -13,9 +13,9 @@ class InvalidQuantityException extends \InvalidArgumentException
     public function __construct($value, $expectedValue)
     {
         parent::__construct(sprintf(
-            'Expected a quantity < to "%s", "%s" given',
+            'Expected a quantity lower than "%d", "%d" given',
             $expectedValue,
-            is_object($value) ? get_class($value) : gettype($value)
+            $value
         ));
     }
 }
