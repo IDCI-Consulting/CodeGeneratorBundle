@@ -24,7 +24,7 @@ class CodeValidatorCompilerPass implements CompilerPassInterface
         );
 
         $taggedServices = $container->findTaggedServiceIds(
-            'code_generator'
+            'code_validator'
         );
 
         foreach ($taggedServices as $id => $tagAttributes) {
