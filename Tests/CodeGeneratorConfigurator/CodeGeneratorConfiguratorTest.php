@@ -22,12 +22,12 @@ class CodeGeneratorConfiguratorTest extends \PHPUnit_Framework_TestCase
     private function getCharsets()
     {
         return array(
-            'uppercase' => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
-            'lowercase' => 'abcdefghijklmnopqrstuvwxyz',
-            'digits' => '0123456789',
-            'punctuation' => ',?!:;.',
-            'brackets' => '{}[]()',
-            'space' => ' ',
+            'uppercase'         => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+            'lowercase'         => 'abcdefghijklmnopqrstuvwxyz',
+            'digits'            => '0123456789',
+            'punctuation'       => ',?!:;.',
+            'brackets'          => '{}[]()',
+            'space'             => ' ',
             'specialCharacters' => array()
         );
     }

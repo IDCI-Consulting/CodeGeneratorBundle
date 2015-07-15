@@ -12,7 +12,7 @@ use IDCI\Bundle\CodeGeneratorBundle\CodeGeneratorConfigurator\CodeGeneratorConfi
 use IDCI\Bundle\CodeGeneratorBundle\Model\GenerationConfiguration;
 use IDCI\Bundle\CodeGeneratorBundle\Model\GenerationConfigurationIncludedCharacterSets;
 
-class CodeGeneratorTest extends \PHPUnit_Framework_TestCase
+class MtRandCodeGeneratorTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Get the charsets
@@ -22,12 +22,12 @@ class CodeGeneratorTest extends \PHPUnit_Framework_TestCase
     private function getCharsets()
     {
         return array(
-            'uppercase' => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
-            'lowercase' => 'abcdefghijklmnopqrstuvwxyz',
-            'digits' => '0123456789',
-            'punctuation' => ',?!:;.',
-            'brackets' => '{}[]()',
-            'space' => ' ',
+            'uppercase'         => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+            'lowercase'         => 'abcdefghijklmnopqrstuvwxyz',
+            'digits'            => '0123456789',
+            'punctuation'       => ',?!:;.',
+            'brackets'          => '{}[]()',
+            'space'             => ' ',
             'specialCharacters' => array()
         );
     }
