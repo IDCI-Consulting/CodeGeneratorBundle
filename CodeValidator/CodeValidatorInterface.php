@@ -14,7 +14,8 @@ interface CodeValidatorInterface
      * Validate a code
      *
      * @param string $code
+     * @param ValidatorContext $context
      * @return boolean
      */
-    public function validate($code);
+    public function validate($code, ValidatorContext $context);
 }

@@ -10,8 +10,7 @@ namespace IDCI\Bundle\CodeGeneratorBundle;
 
 use IDCI\Bundle\CodeGeneratorBundle\CodeGeneratorConfigurator\CodeGeneratorConfiguratorBuilder;
 use IDCI\Bundle\CodeGeneratorBundle\CodeGenerator\CodeGeneratorRegistry;
-use IDCI\Bundle\CodeGeneratorBundle\CodeGeneratorConfigurator\CodeGeneratorConfigurator;
-use IDCI\Bundle\CodeGeneratorBundle\CodeValidator\ArrayCodeValidator;
+use IDCI\Bundle\CodeGeneratorBundle\CodeValidator\CodeValidatorContext;
 use IDCI\Bundle\CodeGeneratorBundle\CodeValidator\CodeValidatorRegistry;
 use IDCI\Bundle\CodeGeneratorBundle\Exception\InvalidQuantityException;
 use IDCI\Bundle\CodeGeneratorBundle\Model\GenerationConfiguration;
@@ -62,12 +61,12 @@ class CodeGeneratorManager
     public function generate($alias, GenerationConfiguration $generationConfiguration)
     {
         // build the configurator
-        /* @var $configurator CodeGeneratorConfigurator */
         $configurator = $this
             ->codeGeneratorConfiguratorBuilder
             ->build($generationConfiguration)
         ;
 
+        // ensure we can generate as much codes as asked
         if ($configurator->getQuantity() > $configurator->getMaxQuantity()) {
             throw new InvalidQuantityException(
                 $configurator->getQuantity(),
@@ -75,10 +74,9 @@ class CodeGeneratorManager
             );
         }
 
+        // generates the codes
         $codes = array();
         while (count($codes) < $configurator->getQuantity()) {
-
-            // generates the code
             $code = $this
                 ->codeGeneratorRegistry
                 ->getCodeGenerator($alias)
@@ -86,13 +84,10 @@ class CodeGeneratorManager
             ;
 
             // validate the code
+            $context = new CodeValidatorContext($codes);
             $validators = $this->codeValidatorRegistry->getCodeValidators();
             foreach ($validators as $validator) {
-                if ($validator instanceof ArrayCodeValidator) {
-                    $success = $validator->validate($code, $codes);
-                } else {
-                    $success = $validator->validate($code);
-                }
+                $success = $validator->validate($code, $context);
                 if ($success) {
                     $codes[] = $code;
                 }
