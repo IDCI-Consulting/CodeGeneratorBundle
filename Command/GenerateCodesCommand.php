@@ -30,21 +30,13 @@ class GenerateCodesCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $quantity = $input->getArgument('quantity');
-        /**
-         * @var GenerationConfiguration
-         */
+
         $configuration = $this->getGenerationConfiguration();
         $configuration->setQuantity($quantity);
-
-
-        /**
-         * @var CodeGeneratorManager
-         */
         $codeGeneratorManager = $this->getContainer()->get('idci.code_generator_manager');
         $codes = $codeGeneratorManager->generate('code_generator_mtrand', $configuration);
 
-        var_dump($codes);
-        $output->writeln($quantity);
+        $output->writeln($codes);
     }
 
     /**
