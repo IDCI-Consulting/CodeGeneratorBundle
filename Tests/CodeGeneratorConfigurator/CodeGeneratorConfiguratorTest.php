@@ -70,14 +70,17 @@ class CodeGeneratorConfiguratorTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetFullCharactersSet()
     {
+        $configuration = $this->getGenerationConfiguration();
+        $configuration->getIncludedCharacterSets()->setExtraCharacters(array('=', '~', '@'));
+        $configuration->setExcludedCharacterSets(array('a', 'M', '6'));
         $configurator = new CodeGeneratorConfigurator(
-            $this->getGenerationConfiguration(),
+            $configuration,
             $this->getCharsets()
         );
         $characterSet = $configurator->getFullCharactersSet();
 
         $this->assertEquals(
-            'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789',
+            'ABCDEFGHIJKLNOPQRSTUVWXYZbcdefghijklmnopqrstuvwxyz012345789=~@',
             $characterSet
         );
     }

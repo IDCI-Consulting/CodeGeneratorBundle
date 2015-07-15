@@ -37,6 +37,7 @@ class CodeGeneratorConfigurator
     /**
      * Get the full character set
      *
+     * @throws \Exception
      * @return mixed
      */
     public function getFullCharactersSet()
@@ -49,6 +50,26 @@ class CodeGeneratorConfigurator
             if ($includedCharsets->$isEr()) {
                 $fullCharset = sprintf("%s%s", $fullCharset, $value);
             }
+        }
+
+        // add extra characters
+        $extraCharacters = $this->configuration->getIncludedCharacterSets()->getExtraCharacters();
+        foreach ($extraCharacters as $extraCharacter) {
+            if (strlen($extraCharacter) !== 1) {
+                throw new \Exception(sprintf('%s is an invalid character', $extraCharacter));
+            }
+            if (strpos($fullCharset, $extraCharacter) === false) {
+                $fullCharset = sprintf("%s%s", $fullCharset, $extraCharacter);
+            }
+        }
+
+        //remove excluded characters
+        $excludedCharacters = $this->configuration->getExcludedCharacterSets();
+        foreach ($excludedCharacters as $excludedCharacter) {
+            if (strlen($excludedCharacter) !== 1) {
+                throw new \Exception(sprintf('%s is an invalid character', $excludedCharacter));
+            }
+            $fullCharset = str_replace($excludedCharacter, '', $fullCharset);
         }
 
         return $fullCharset;
