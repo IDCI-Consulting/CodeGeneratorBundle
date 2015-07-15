@@ -21,9 +21,9 @@ class CodeValidatorRegistry implements CodeValidatorRegistryInterface
     /**
      * {@inheritDoc}
      */
-    public function setCodeValidator(CodeValidatorInterface $type, $alias)
+    public function setCodeValidator(CodeValidatorInterface $codeValidator, $alias)
     {
-        $this->validators[$alias] = $type;
+        $this->validators[$alias] = $codeValidator;
         return $this;
     }
 

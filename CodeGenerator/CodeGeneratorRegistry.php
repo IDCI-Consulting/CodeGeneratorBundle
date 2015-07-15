@@ -20,9 +20,9 @@ class CodeGeneratorRegistry implements CodeGeneratorRegistryInterface
     /**
      * {@inheritDoc}
      */
-    public function setCodeGenerator(CodeGeneratorInterface $type, $alias)
+    public function setCodeGenerator(CodeGeneratorInterface $codeGenerator, $alias)
     {
-        $this->codeGenerators[$alias] = $type;
+        $this->codeGenerators[$alias] = $codeGenerator;
         return $this;
     }
 
@@ -43,7 +43,7 @@ class CodeGeneratorRegistry implements CodeGeneratorRegistryInterface
             throw new UnexpectedTypeException($alias, 'string');
         }
         if (!isset($this->codeGenerators[$alias])) {
-            throw new \InvalidArgumentException(sprintf('Could not load type "%s"', $alias));
+            throw new \InvalidArgumentException(sprintf('Could not load code generator "%s"', $alias));
         }
         return $this->codeGenerators[$alias];
     }
