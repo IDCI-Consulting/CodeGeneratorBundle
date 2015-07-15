@@ -46,6 +46,7 @@ class CodeGeneratorRegistry implements CodeGeneratorRegistryInterface
         if (!isset($this->codeGenerators[$alias])) {
             throw new \InvalidArgumentException(sprintf('Could not load code generator "%s"', $alias));
         }
+
         return $this->codeGenerators[$alias];
     }
 
@@ -57,6 +58,7 @@ class CodeGeneratorRegistry implements CodeGeneratorRegistryInterface
         if (!isset($this->codeGenerators[$alias])) {
             return true;
         }
+
         return false;
     }
 }

@@ -23,6 +23,7 @@ class CodeValidatorRegistry implements CodeValidatorRegistryInterface
     public function setCodeValidator(CodeValidatorInterface $codeValidator, $alias)
     {
         $this->validators[$alias] = $codeValidator;
+
         return $this;
     }
 
@@ -45,6 +46,7 @@ class CodeValidatorRegistry implements CodeValidatorRegistryInterface
         if (!isset($this->validators[$alias])) {
             throw new \InvalidArgumentException(sprintf('Could not load validator "%s"', $alias));
         }
+
         return $this->validators[$alias];
     }
 
@@ -56,6 +58,7 @@ class CodeValidatorRegistry implements CodeValidatorRegistryInterface
         if (!isset($this->validators[$alias])) {
             return true;
         }
+
         return false;
     }
 }

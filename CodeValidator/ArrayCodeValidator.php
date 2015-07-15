@@ -14,10 +14,10 @@ class ArrayCodeValidator implements CodeValidatorInterface
      * Validate a code
      *
      * @param string $code
-     * @param ValidatorContext $context
+     * @param CodeValidatorContext $context
      * @return boolean
      */
-    public function validate($code, ValidatorContext $context) {
+    public function validate($code, CodeValidatorContext $context) {
 
         if (in_array($code, $context->getCodes())) {
             return false;
