@@ -8,6 +8,8 @@
 
 namespace IDCI\Bundle\CodeGeneratorBundle;
 
+use IDCI\Bundle\CodeGeneratorBundle\DependencyInjection\Compiler\CodeGeneratorCompilerPass;
+use IDCI\Bundle\CodeGeneratorBundle\DependencyInjection\Compiler\CodeValidatorCompilerPass;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
@@ -18,6 +20,7 @@ class IDCICodeGeneratorBundle extends Bundle
      */
     public function build(ContainerBuilder $container)
     {
-
+        $container->addCompilerPass(new CodeGeneratorCompilerPass());
+        $container->addCompilerPass(new CodeValidatorCompilerPass());
     }
 }
