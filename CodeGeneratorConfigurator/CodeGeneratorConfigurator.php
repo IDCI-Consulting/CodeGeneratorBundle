@@ -15,12 +15,12 @@ class CodeGeneratorConfigurator
     /**
      * @var GenerationConfiguration
      */
-    private $configuration;
+    protected $configuration;
 
     /**
      * @var array
      */
-    private $charsets;
+    protected $charsets;
 
     /**
      * Constructor
