@@ -153,3 +153,12 @@ Now you can use your strategy this way:
 $codeGeneratorManager = $this->getContainer()->get('idci.code_generator_manager');
 $codes = $codeGeneratorManager->generate('code_generator_custom', $configuration);
 ```
+
+Tests
+=====
+
+You can trigger the tests with the following command:
+
+```sh
+phpunit -c .
+```
