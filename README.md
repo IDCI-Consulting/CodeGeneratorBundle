@@ -74,3 +74,5 @@ CodeGeneratorConfigurator -> Configuration
 CodeValidator -> Validation
 
 End the documentations !
+
+Add UML Schema (display them in architecture.md).
