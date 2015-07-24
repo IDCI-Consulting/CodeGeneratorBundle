@@ -16,7 +16,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 class IDCICodeGeneratorBundle extends Bundle
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function build(ContainerBuilder $container)
     {

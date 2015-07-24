@@ -6,7 +6,7 @@
  * @license: MIT
  */
 
-namespace IDCI\Bundle\CodeGeneratorBundle\CodeValidator;
+namespace IDCI\Bundle\CodeGeneratorBundle\Validation;
 
 interface CodeValidatorRegistryInterface
 {

@@ -6,16 +6,17 @@
  * @license: MIT
  */
 
-namespace IDCI\Bundle\CodeGeneratorBundle\CodeGenerator;
+namespace IDCI\Bundle\CodeGeneratorBundle\Generation;
 
-use IDCI\Bundle\CodeGeneratorBundle\CodeGeneratorConfigurator\CodeGeneratorConfigurator;
+use IDCI\Bundle\CodeGeneratorBundle\Configuration\CodeGeneratorConfigurator;
 
 interface CodeGeneratorInterface
 {
     /**
-     * Generate codes according to the given configuration
+     * Generate codes according to the given configuration.
      *
      * @param CodeGeneratorConfigurator $configurator
+     *
      * @return string
      */
     public function generate(CodeGeneratorConfigurator $configurator);

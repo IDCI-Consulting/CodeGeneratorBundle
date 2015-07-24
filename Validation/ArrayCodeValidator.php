@@ -6,15 +6,16 @@
  * @license: MIT
  */
 
-namespace IDCI\Bundle\CodeGeneratorBundle\CodeValidator;
+namespace IDCI\Bundle\CodeGeneratorBundle\Validation;
 
 class ArrayCodeValidator implements CodeValidatorInterface
 {
     /**
-     * Validate a code
+     * Validate a code.
      *
-     * @param string $code
+     * @param string               $code
      * @param CodeValidatorContext $context
+     *
      * @return boolean
      */
     public function validate($code, CodeValidatorContext $context) {

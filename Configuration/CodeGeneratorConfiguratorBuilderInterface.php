@@ -6,17 +6,18 @@
  * @license: MIT
  */
 
-namespace IDCI\Bundle\CodeGeneratorBundle\CodeGeneratorConfigurator;
+namespace IDCI\Bundle\CodeGeneratorBundle\Configuration;
 
 use IDCI\Bundle\CodeGeneratorBundle\Model\GenerationConfiguration;
 
 interface CodeGeneratorConfiguratorBuilderInterface
 {
     /**
-     * Build a code configurator
+     * Build a code configurator.
      *
      * @param GenerationConfiguration $configuration
-     * @return CodeGeneratorConfiguratorInterface
+     *
+     * @return CodeGeneratorConfigurator
      */
     public function build(GenerationConfiguration $configuration);
 }

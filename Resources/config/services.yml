@@ -1,30 +1,35 @@
 services:
 
-    idci_code_generator.code_generator_registry:
-        class: IDCI\Bundle\CodeGeneratorBundle\CodeGenerator\CodeGeneratorRegistry
-
-    idci_code_generator.code_validator_registry:
-        class: IDCI\Bundle\CodeGeneratorBundle\CodeValidator\CodeValidatorRegistry
-
-    idci.code_configurator_builder:
-        class: IDCI\Bundle\CodeGeneratorBundle\CodeGeneratorConfigurator\CodeGeneratorConfiguratorBuilder
-        arguments: [%idci_code_generator.charsets%]
-
-    idci.code_generator_manager:
+    # Manager
+    idci_code_generator.manager:
         class: IDCI\Bundle\CodeGeneratorBundle\CodeGeneratorManager
         arguments:
-            - @idci_code_generator.code_generator_registry
-            - @idci_code_generator.code_validator_registry
-            - @idci.code_configurator_builder
+            - @idci_code_generator.generator_registry
+            - @idci_code_generator.validator_registry
+            - @idci_code_generator.configurator_builder
 
-    # code generators
-    idci.code_generator.mt_rand:
-        class: IDCI\Bundle\CodeGeneratorBundle\CodeGenerator\MtRandCodeGenerator
-        tags:
-            - { name: code_generator, alias: code_generator_mtrand }
 
-    # code validators
-    idci.code_validator.array:
-        class: IDCI\Bundle\CodeGeneratorBundle\CodeValidator\ArrayCodeValidator
+    # Configurator
+    idci_code_generator.configurator_builder:
+        class: IDCI\Bundle\CodeGeneratorBundle\Configuration\CodeGeneratorConfiguratorBuilder
+        arguments: [%idci_code_generator.charsets%]
+
+
+    # Generator
+    idci_code_generator.generator_registry:
+        class: IDCI\Bundle\CodeGeneratorBundle\Generation\CodeGeneratorRegistry
+
+    idci_code_generator.generator.mt_rand:
+        class: IDCI\Bundle\CodeGeneratorBundle\Generation\MtRandCodeGenerator
         tags:
-            - { name: code_validator, alias: code_validator_mongo }
+            - { name: code_generator, alias: mtrand }
+
+
+    # Validator
+    idci_code_generator.validator_registry:
+        class: IDCI\Bundle\CodeGeneratorBundle\Validation\CodeValidatorRegistry
+
+    idci_code_generator.validator.array:
+        class: IDCI\Bundle\CodeGeneratorBundle\Validation\ArrayCodeValidator
+        tags:
+            - { name: code_validator, alias: array }

@@ -6,7 +6,7 @@
  * @license: MIT
  */
 
-namespace IDCI\Bundle\CodeGeneratorBundle\CodeGeneratorConfigurator;
+namespace IDCI\Bundle\CodeGeneratorBundle\Configuration;
 
 use IDCI\Bundle\CodeGeneratorBundle\Model\GenerationConfiguration;
 
@@ -18,7 +18,7 @@ class CodeGeneratorConfiguratorBuilder implements CodeGeneratorConfiguratorBuild
     private $charsets;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param array $charsets
      */

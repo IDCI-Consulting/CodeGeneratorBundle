@@ -18,23 +18,29 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class GenerateCodesCommand extends ContainerAwareCommand
 {
+    /**
+     * {@inheritDoc}
+     */
     protected function configure()
     {
         $this
-            ->setName('idci:generate:codes')
+            ->setName('idci:code-generator:generate')
             ->setDescription('Generate unique codes')
             ->addArgument('quantity', InputArgument::REQUIRED, 'How many code do you want to generate')
         ;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $quantity = $input->getArgument('quantity');
 
         $configuration = $this->getGenerationConfiguration();
         $configuration->setQuantity($quantity);
-        $codeGeneratorManager = $this->getContainer()->get('idci.code_generator_manager');
-        $codes = $codeGeneratorManager->generate('code_generator_mtrand', $configuration);
+        $codeGeneratorManager = $this->getContainer()->get('idci_code_generator.manager');
+        $codes = $codeGeneratorManager->generate('mtrand', $configuration);
 
         $output->writeln($codes);
     }

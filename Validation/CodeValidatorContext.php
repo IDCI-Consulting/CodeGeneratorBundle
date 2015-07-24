@@ -6,7 +6,7 @@
  * @license: MIT
  */
 
-namespace IDCI\Bundle\CodeGeneratorBundle\CodeValidator;
+namespace IDCI\Bundle\CodeGeneratorBundle\Validation;
 
 class CodeValidatorContext
 {
@@ -16,7 +16,7 @@ class CodeValidatorContext
     private $codes;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param array $codes
      */
@@ -39,6 +39,7 @@ class CodeValidatorContext
      * Set codes
      *
      * @param array $codes
+     *
      * @return CodeValidatorContext
      */
     public function setCodes($codes)
@@ -50,6 +51,7 @@ class CodeValidatorContext
      * Add a code
      *
      * @param integer $code
+     *
      * @return CodeValidatorContext
      */
     public function addCode($code)
@@ -58,6 +60,4 @@ class CodeValidatorContext
 
         return $this;
     }
-
-
 }

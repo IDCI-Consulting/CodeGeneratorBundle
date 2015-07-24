@@ -6,10 +6,10 @@
  * @license: MIT
  */
 
-namespace IDCI\Bundle\CodeGeneratorBundle\Tests\CodeGeneratorConfigurator;
+namespace IDCI\Bundle\CodeGeneratorBundle\Tests\Validation;
 
-use IDCI\Bundle\CodeGeneratorBundle\CodeValidator\ArrayCodeValidator;
-use IDCI\Bundle\CodeGeneratorBundle\CodeValidator\CodeValidatorContext;
+use IDCI\Bundle\CodeGeneratorBundle\Validation\ArrayCodeValidator;
+use IDCI\Bundle\CodeGeneratorBundle\Validation\CodeValidatorContext;
 
 class ArrayCodeValidatorTest extends \PHPUnit_Framework_TestCase
 {

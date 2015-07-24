@@ -21,22 +21,88 @@ class GenerationConfiguration
     private $maxLength;
 
     /**
-     * @var GenerationConfigurationIncludedCharacterSets
+     * [a-z] characters.
+     *
+     * @var boolean
      */
-    private $includedCharacterSets;
+    private $lowercase;
+
+    /**
+     * [A-Z] characters.
+     *
+     * @var boolean
+     */
+    private $uppercase;
+
+    /**
+     * [0-9] characters.
+     *
+     * @var boolean
+     */
+    private $digits;
+
+    /**
+     * [,;.!?] characters.
+     *
+     * @var boolean
+     */
+    private $punctuation;
+
+    /**
+     * [{}[]()] characters.
+     *
+     * @var boolean
+     */
+    private $brackets;
+
+    /**
+     * Space character.
+     *
+     * @var boolean
+     */
+    private $space;
+
+    /**
+     * Special characters.
+     *
+     * @var boolean
+     */
+    private $specialCharacters;
+
+    /**
+     * Extra characters.
+     *
+     * @var array()
+     */
+    private $extraCharacters;
 
     /**
      * @var array()
      */
-    private $excludedCharacterSets;
+    private $excludedCharacters;
 
     /**
-     * @var integer
+     * Constructor.
      */
-    private $quantity;
+    public function __construct()
+    {
+        $this
+            ->setMinLength(4)
+            ->setMaxLength(8)
+            ->setLowercase(true)
+            ->setUppercase(true)
+            ->setDigits(true)
+            ->setPunctuation(true)
+            ->setBrackets(false)
+            ->setSpace(false)
+            ->setSpecialCharacters(false)
+            ->setExtraCharacters(array())
+            ->setExcludedCharacters(array())
+        ;
+    }
 
     /**
-     * Get minLength
+     * Get min length.
      *
      * @return int
      */
@@ -46,9 +112,10 @@ class GenerationConfiguration
     }
 
     /**
-     * Set minLength
+     * Set min Length.
      *
      * @param int $minLength
+     *
      * @return GenerationConfiguration
      */
     public function setMinLength($minLength)
@@ -58,7 +125,8 @@ class GenerationConfiguration
         return $this;
     }
 
-    /**Get maxLength
+    /**
+     * Get max length.
      *
      * @return int
      */
@@ -68,9 +136,10 @@ class GenerationConfiguration
     }
 
     /**
-     * Set maxLength
+     * Set max length.
      *
      * @param int $maxLength
+     *
      * @return GenerationConfiguration
      */
     public function setMaxLength($maxLength)
@@ -81,70 +150,217 @@ class GenerationConfiguration
     }
 
     /**
-     * Get includedCharacterSets
+     * Is lowercase.
      *
-     * @return GenerationConfigurationIncludedCharacterSets
+     * @return boolean
      */
-    public function getIncludedCharacterSets()
+    public function isLowercase()
     {
-        return $this->includedCharacterSets;
+        return $this->lowercase;
     }
 
     /**
-     * Set includedCharacterSets
+     * Set lowercase.
      *
-     * @param GenerationConfigurationIncludedCharacterSets $includedCharacterSets
+     * @param boolean $lowercase
+     *
      * @return GenerationConfiguration
      */
-    public function setIncludedCharacterSets($includedCharacterSets)
+    public function setLowercase($lowercase)
     {
-        $this->includedCharacterSets = $includedCharacterSets;
+        $this->lowercase = $lowercase;
 
         return $this;
     }
 
     /**
-     * Get excludedCharacterSets
+     * Is uppercase.
+     *
+     * @return boolean
+     */
+    public function isUppercase()
+    {
+        return $this->uppercase;
+    }
+
+    /**
+     * Set uppercase.
+     *
+     * @param boolean $uppercase
+     *
+     * @return GenerationConfiguration
+     */
+    public function setUppercase($uppercase)
+    {
+        $this->uppercase = $uppercase;
+
+        return $this;
+    }
+
+    /**
+     * Is digits.
+     *
+     * @return boolean
+     */
+    public function isDigits()
+    {
+        return $this->digits;
+    }
+
+    /**
+     * Set digits.
+     *
+     * @param boolean $digits
+     *
+     * @return GenerationConfiguration.
+     */
+    public function setDigits($digits)
+    {
+        $this->digits = $digits;
+
+        return $this;
+    }
+
+    /**
+     * Is punctuation.
+     *
+     * @return boolean
+     */
+    public function isPunctuation()
+    {
+        return $this->punctuation;
+    }
+
+    /**
+     * Set punctuation.
+     *
+     * @param boolean $punctuation
+     *
+     * @return GenerationConfiguration
+     */
+    public function setPunctuation($punctuation)
+    {
+        $this->punctuation = $punctuation;
+
+        return $this;
+    }
+
+    /**
+     * Is brackets.
+     *
+     * @return boolean
+     */
+    public function isBrackets()
+    {
+        return $this->brackets;
+    }
+
+    /**
+     * Set brackets.
+     *
+     * @param boolean $brackets
+     *
+     * @return GenerationConfiguration
+     */
+    public function setBrackets($brackets)
+    {
+        $this->brackets = $brackets;
+
+        return $this;
+    }
+
+    /**
+     * Is space.
+     *
+     * @return boolean
+     */
+    public function isSpace()
+    {
+        return $this->space;
+    }
+
+    /**
+     * Set space.
+     *
+     * @param boolean $space
+     *
+     * @return GenerationConfiguration
+     */
+    public function setSpace($space)
+    {
+        $this->space = $space;
+
+        return $this;
+    }
+
+    /**
+     * Is special characters.
+     *
+     * @return boolean
+     */
+    public function isSpecialCharacters()
+    {
+        return $this->specialCharacters;
+    }
+
+    /**
+     * Set special characters.
+     *
+     * @param boolean $specialCharacters
+     *
+     * @return GenerationConfiguration
+     */
+    public function setSpecialCharacters($specialCharacters)
+    {
+        $this->specialCharacters = $specialCharacters;
+
+        return $this;
+    }
+
+    /**
+     * Get extra characters.
      *
      * @return array
      */
-    public function getExcludedCharacterSets()
+    public function getExtraCharacters()
     {
-        return $this->excludedCharacterSets;
+        return $this->extraCharacters;
     }
 
     /**
-     * Set excludedCharacterSets
+     * Set extra characters.
      *
-     * @param array $excludedCharacterSets
+     * @param array $extraCharacters
+     *
      * @return GenerationConfiguration
      */
-    public function setExcludedCharacterSets($excludedCharacterSets)
+    public function setExtraCharacters(array $extraCharacters)
     {
-        $this->excludedCharacterSets = $excludedCharacterSets;
+        $this->extraCharacters = $extraCharacters;
 
         return $this;
     }
 
     /**
-     * Get quantity
+     * Get excluded characters.
      *
-     * @return int
+     * @return array
      */
-    public function getQuantity()
+    public function getExcludedCharacters()
     {
-        return $this->quantity;
+        return $this->excludedCharacters;
     }
 
     /**
-     * Set quantity
+     * Set excluded characters.
      *
-     * @param int $quantity
+     * @param array $excludedCharacters
+     *
      * @return GenerationConfiguration
      */
-    public function setQuantity($quantity)
+    public function setExcludedCharacters($excludedCharacters)
     {
-        $this->quantity = $quantity;
+        $this->excludedCharacters = $excludedCharacters;
 
         return $this;
     }

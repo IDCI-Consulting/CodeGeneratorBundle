@@ -6,7 +6,7 @@
  * @license: MIT
  */
 
-namespace IDCI\Bundle\CodeGeneratorBundle\CodeGenerator;
+namespace IDCI\Bundle\CodeGeneratorBundle\Generation;
 
 use IDCI\Bundle\CodeGeneratorBundle\Exception\UnexpectedTypeException;
 
@@ -18,7 +18,7 @@ class CodeGeneratorRegistry implements CodeGeneratorRegistryInterface
     protected $codeGenerators;
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function setCodeGenerator(CodeGeneratorInterface $codeGenerator, $alias)
     {
@@ -28,7 +28,7 @@ class CodeGeneratorRegistry implements CodeGeneratorRegistryInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getCodeGenerators()
     {
@@ -36,7 +36,7 @@ class CodeGeneratorRegistry implements CodeGeneratorRegistryInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getCodeGenerator($alias)
     {
@@ -51,7 +51,7 @@ class CodeGeneratorRegistry implements CodeGeneratorRegistryInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function hasCodeGenerator($alias)
     {

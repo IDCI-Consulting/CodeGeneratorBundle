@@ -6,7 +6,7 @@
  * @license: MIT
  */
 
-namespace IDCI\Bundle\CodeGeneratorBundle\CodeValidator;
+namespace IDCI\Bundle\CodeGeneratorBundle\Validation;
 
 use IDCI\Bundle\CodeGeneratorBundle\Exception\UnexpectedTypeException;
 
@@ -16,7 +16,7 @@ class CodeValidatorRegistry implements CodeValidatorRegistryInterface
      * @var array
      */
     protected $validators;
-    
+
     /**
      * {@inheritDoc}
      */
