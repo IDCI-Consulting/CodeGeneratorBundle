@@ -104,7 +104,7 @@ class CodeGeneratorConfigurator
     {
         $result = 0;
         for ($i = $this->configuration->getMinLength(); $i <= $this->configuration->getMaxLength(); $i++) {
-            $result += pow(strlen($this->getFullCharactersSet()), $i);
+            $result += pow(mb_strlen($this->getFullCharactersSet()), $i);
         }
 
         return $result;

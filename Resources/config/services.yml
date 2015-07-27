@@ -4,9 +4,9 @@ services:
     idci_code_generator.manager:
         class: IDCI\Bundle\CodeGeneratorBundle\CodeGeneratorManager
         arguments:
+            - @idci_code_generator.configurator_builder
             - @idci_code_generator.generator_registry
             - @idci_code_generator.validator_registry
-            - @idci_code_generator.configurator_builder
 
 
     # Configurator
@@ -19,10 +19,10 @@ services:
     idci_code_generator.generator_registry:
         class: IDCI\Bundle\CodeGeneratorBundle\Generation\CodeGeneratorRegistry
 
-    idci_code_generator.generator.mt_rand:
-        class: IDCI\Bundle\CodeGeneratorBundle\Generation\MtRandCodeGenerator
+    idci_code_generator.generator.random:
+        class: IDCI\Bundle\CodeGeneratorBundle\Generation\RandomCodeGenerator
         tags:
-            - { name: code_generator, alias: mtrand }
+            - { name: code_generator, alias: random }
 
 
     # Validator

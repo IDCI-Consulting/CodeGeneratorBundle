@@ -8,72 +8,85 @@
 
 namespace IDCI\Bundle\CodeGeneratorBundle;
 
-use IDCI\Bundle\CodeGeneratorBundle\Configuration\CodeGeneratorConfiguratorBuilder;
-use IDCI\Bundle\CodeGeneratorBundle\Generation\CodeGeneratorRegistry;
-use IDCI\Bundle\CodeGeneratorBundle\Validation\CodeValidatorContext;
-use IDCI\Bundle\CodeGeneratorBundle\Validation\CodeValidatorRegistry;
+use IDCI\Bundle\CodeGeneratorBundle\Configuration\CodeGeneratorConfiguratorBuilderInterface;
+use IDCI\Bundle\CodeGeneratorBundle\Generation\CodeGeneratorRegistryInterface;
+use IDCI\Bundle\CodeGeneratorBundle\Validation\CodeValidatorRegistryInterface;
 use IDCI\Bundle\CodeGeneratorBundle\Model\GenerationConfiguration;
+use IDCI\Bundle\CodeGeneratorBundle\Exception\InvalidConfigurationException;
 
 class CodeGeneratorManager
 {
     /**
-     * @var CodeGeneratorRegistry
+     * @var CodeGeneratorConfiguratorBuilderInterface
      */
-    private $codeGeneratorRegistry;
+    private $configuratorBuilder;
 
     /**
-     * @var CodeValidatorRegistry
+     * @var CodeGeneratorRegistryInterface
      */
-    private $codeValidatorRegistry;
+    private $generatorRegistry;
 
     /**
-     * @var CodeGeneratorConfiguratorBuilder
+     * @var CodeValidatorRegistryInterface
      */
-    private $codeGeneratorConfiguratorBuilder;
+    private $validatorRegistry;
 
     /**
      * Constructor.
      *
-     * @param CodeGeneratorRegistry            $codeGeneratorRegistry
-     * @param CodeValidatorRegistry            $codeValidatorRegistry
-     * @param CodeGeneratorConfiguratorBuilder $codeGeneratorConfiguratorBuilder
+     * @param CodeGeneratorConfiguratorBuilderInterface $configuratorBuilder
+     * @param CodeGeneratorRegistryInterface            $generatorRegistry
+     * @param CodeValidatorRegistryInterface            $validatorRegistry
      */
     public function __construct(
-        CodeGeneratorRegistry            $codeGeneratorRegistry,
-        CodeValidatorRegistry            $codeValidatorRegistry,
-        CodeGeneratorConfiguratorBuilder $codeGeneratorConfiguratorBuilder
+        CodeGeneratorConfiguratorBuilderInterface $configuratorBuilder,
+        CodeGeneratorRegistryInterface   $generatorRegistry,
+        CodeValidatorRegistryInterface   $validatorRegistry
     )
     {
-        $this->codeGeneratorRegistry            = $codeGeneratorRegistry;
-        $this->codeValidatorRegistry            = $codeValidatorRegistry;
-        $this->codeGeneratorConfiguratorBuilder = $codeGeneratorConfiguratorBuilder;
+        $this->configuratorBuilder = $configuratorBuilder;
+        $this->generatorRegistry   = $generatorRegistry;
+        $this->validatorRegistry   = $validatorRegistry;
     }
 
     /**
      * Generate codes.
      *
-     * @param string                  $alias          The generator alias.
+     * @param integer                 $quantity       The quantity of codes to generate.
      * @param GenerationConfiguration $configuration  The generation configuration.
+     * @param string                  $alias          The generator alias.
      *
      * @return array $codes The generated codes.
      *
      * @throws InvalidConfigurationException
      */
-    public function generate($alias, GenerationConfiguration $configuration)
+    public function generate($quantity = 42, GenerationConfiguration $configuration = null, $alias = 'random')
     {
+        $configuration = null === $configuration ?
+            new GenerationConfiguration() :
+            $configuration
+        ;
+
         // Build the configurator
         $configurator = $this
-            ->codeGeneratorConfiguratorBuilder
+            ->configuratorBuilder
             ->build($configuration)
         ;
 
-        // Ensure we can generate as much codes as asked (TODO: $configuration->isValid())
+        // Ensure we can generate as much codes as asked
+        if ($quantity > $configurator->getMaxQuantity()) {
+            throw new InvalidConfigurationException(sprintf(
+                'The asked codes generation quantity `%d` is upper than max quantity of codes that could be generated `%d`',
+                $quantity,
+                $configurator->getMaxQuantity()
+            ));
+        }
 
         // Generates the codes
         $codes = array();
-        while (count($codes) < $configurator->getQuantity()) {
+        while (count($codes) < $quantity) {
             $code = $this
-                ->codeGeneratorRegistry
+                ->generatorRegistry
                 ->getCodeGenerator($alias)
                 ->generate($configurator)
             ;
@@ -89,6 +102,7 @@ class CodeGeneratorManager
                 }
             }
             */
+            $codes[] = $code;
         }
 
         return $codes;
