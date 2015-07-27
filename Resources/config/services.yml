@@ -28,8 +28,3 @@ services:
     # Validator
     idci_code_generator.validator_registry:
         class: IDCI\Bundle\CodeGeneratorBundle\Validation\CodeValidatorRegistry
-
-    idci_code_generator.validator.array:
-        class: IDCI\Bundle\CodeGeneratorBundle\Validation\ArrayCodeValidator
-        tags:
-            - { name: code_validator, alias: array }

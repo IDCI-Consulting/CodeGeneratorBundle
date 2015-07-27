@@ -103,7 +103,7 @@ class CodeGeneratorConfigurator
     public function getMaxQuantity()
     {
         $result = 0;
-        for ($i = $this->configuration->getMinLength(); $i <= $this->configuration->getMaxLength(); $i++) {
+        for ($i = $this->configuration->getMaxLength(); $i >= $this->configuration->getMinLength(); $i--) {
             $result += pow(mb_strlen($this->getFullCharactersSet()), $i);
         }
 

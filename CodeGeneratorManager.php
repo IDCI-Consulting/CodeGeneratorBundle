@@ -52,15 +52,20 @@ class CodeGeneratorManager
     /**
      * Generate codes.
      *
-     * @param integer                 $quantity       The quantity of codes to generate.
-     * @param GenerationConfiguration $configuration  The generation configuration.
-     * @param string                  $alias          The generator alias.
+     * @param integer                 $quantity         The quantity of codes to generate.
+     * @param GenerationConfiguration $configuration    The generation configuration.
+     * @param string                  $generatorAlias   The generator alias to use.
+     * @param array                   $validatorAliases The validators aliases to use.
      *
      * @return array $codes The generated codes.
      *
      * @throws InvalidConfigurationException
      */
-    public function generate($quantity = 42, GenerationConfiguration $configuration = null, $alias = 'random')
+    public function generate(
+        $quantity = 42,
+        GenerationConfiguration $configuration = null,
+        $generatorAlias = 'random',
+        array $validatorAliases = array())
     {
         $configuration = null === $configuration ?
             new GenerationConfiguration() :
@@ -82,29 +87,49 @@ class CodeGeneratorManager
             ));
         }
 
-        // Generates the codes
         $codes = array();
         while (count($codes) < $quantity) {
+            // Generate the codes
             $code = $this
                 ->generatorRegistry
-                ->getCodeGenerator($alias)
+                ->getCodeGenerator($generatorAlias)
                 ->generate($configurator)
             ;
 
-            /* TODO: REWORK !
-            // validate the code
-            $context = new CodeValidatorContext($codes);
-            $validators = $this->codeValidatorRegistry->getCodeValidators();
-            foreach ($validators as $validator) {
-                $success = $validator->validate($code, $context);
-                if ($success) {
-                    $codes[] = $code;
-                }
+            // Do not allow same generated codes
+            if (
+                in_array($code, $codes) ||
+                !$this->isCodeValid($code, $validatorAliases)
+            ) {
+                continue;
             }
-            */
+
             $codes[] = $code;
         }
 
         return $codes;
+    }
+
+    /**
+     * Returns whether the given code is valid or not
+     *
+     * @param string $code             The code to validate.
+     * @param array  $validatorAliases The validators aliases to use.
+     *
+     * @return boolean
+     */
+    protected function isCodeValid($code, array $validatorAliases = array())
+    {
+        foreach ($validatorAliases as $validatorAlias) {
+            if (!$this
+                ->codeValidatorRegistry
+                ->getCodeValidator($validatorAlias)
+                ->validate($code)
+            ) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

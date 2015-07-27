@@ -11,6 +11,13 @@ namespace IDCI\Bundle\CodeGeneratorBundle\Validation;
 interface CodeValidatorRegistryInterface
 {
     /**
+     * Returns code Validators.
+     *
+     * @return array
+     */
+    public function getCodeValidators();
+
+    /**
      * Sets an code Validator identify by a alias.
      *
      * @param CodeValidatorInterface $codeValidator The code Validator.
@@ -19,13 +26,6 @@ interface CodeValidatorRegistryInterface
      * @return CodeValidatorRegistryInterface
      */
     public function setCodeValidator(CodeValidatorInterface $codeValidator, $alias);
-
-    /**
-     * Returns code Validators.
-     *
-     * @return array
-     */
-    public function getCodeValidators();
 
     /**
      * Returns an code Validator by alias.

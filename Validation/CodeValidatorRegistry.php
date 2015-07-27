@@ -15,14 +15,14 @@ class CodeValidatorRegistry implements CodeValidatorRegistryInterface
     /**
      * @var array
      */
-    protected $validators;
+    protected $codeValidators;
 
     /**
      * {@inheritDoc}
      */
     public function setCodeValidator(CodeValidatorInterface $codeValidator, $alias)
     {
-        $this->validators[$alias] = $codeValidator;
+        $this->codeValidators[$alias] = $codeValidator;
 
         return $this;
     }
@@ -32,7 +32,7 @@ class CodeValidatorRegistry implements CodeValidatorRegistryInterface
      */
     public function getCodeValidators()
     {
-        return $this->validators;
+        return $this->codeValidators;
     }
 
     /**
@@ -43,11 +43,11 @@ class CodeValidatorRegistry implements CodeValidatorRegistryInterface
         if (!is_string($alias)) {
             throw new UnexpectedTypeException($alias, 'string');
         }
-        if (!isset($this->validators[$alias])) {
-            throw new \InvalidArgumentException(sprintf('Could not load validator "%s"', $alias));
+        if (!isset($this->codeValidators[$alias])) {
+            throw new \InvalidArgumentException(sprintf('Could not load code validator "%s"', $alias));
         }
 
-        return $this->validators[$alias];
+        return $this->codeValidators[$alias];
     }
 
     /**
@@ -55,7 +55,7 @@ class CodeValidatorRegistry implements CodeValidatorRegistryInterface
      */
     public function hasCodeValidator($alias)
     {
-        if (!isset($this->validators[$alias])) {
+        if (!isset($this->codeValidators[$alias])) {
             return true;
         }
 

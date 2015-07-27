@@ -55,23 +55,23 @@ class CodeGeneratorManagerTest extends \PHPUnit_Framework_TestCase
             $validatorRegistry
         );
 
-        $codes = $codeManager->generate(100);
+        $codes = $codeManager->generate(10000);
 
-        $this->assertEquals(100, count($codes));
+        $this->assertEquals(10000, count($codes));
     }
 
     /**
-     * Test the generate function
+     * Test the generate function (invalid generation)
      */
     public function testInvalidGeneration()
     {
         $configuration = new GenerationConfiguration();
         $configuration
-            ->setMinLength(4)
             ->setMaxLength(4)
+            ->setMinLength(4)
         ;
 
-        $builder = new CodeGeneratorConfiguratorBuilder(array('lowercase' => 'a'));
+        $builder = new CodeGeneratorConfiguratorBuilder(array('lowercase' => 'ab'));
 
         $generatorRegistry = new CodeGeneratorRegistry();
         $generatorRegistry->setCodeGenerator(new RandomCodeGenerator(), 'random');
@@ -85,10 +85,10 @@ class CodeGeneratorManagerTest extends \PHPUnit_Framework_TestCase
         );
 
         try {
-            var_dump(2, $builder->build($configuration)->getMaxQuantity());die;
-            $codeManager->generate(2);
+            $codeManager->generate(17, $configuration);
+            $this->fail("Expected exception invalid configuration not thrown");
         } catch (InvalidConfigurationException $e) {
-            $this->assertTrue();
+            $this->assertTrue(true);
         }
     }
 }
