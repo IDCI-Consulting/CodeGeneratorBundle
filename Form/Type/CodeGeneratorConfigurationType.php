@@ -21,7 +21,7 @@ class CodeGeneratorConfigurationType extends AbstractType
     {
         $builder
             ->add('quantity', 'integer')
-            ->add('configuration', new GenerationConfigurationType())
+            ->add('configuration', 'code_generation_configuration')
         ;
     }
 
@@ -30,6 +30,6 @@ class CodeGeneratorConfigurationType extends AbstractType
      */
     public function getName()
     {
-        return 'idci_code_generator_configuration';
+        return 'code_generator_configuration';
     }
 }

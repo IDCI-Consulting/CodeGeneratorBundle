@@ -31,7 +31,13 @@ services:
 
 
     # Form
+    form.type.code_generation_configuration:
+        class: IDCI\Bundle\CodeGeneratorBundle\Form\Type\GenerationConfigurationType
+        arguments: [%idci_code_generator.charsets%]
+        tags:
+            - { name: form.type, alias: code_generation_configuration }
+
     form.type.code_generator_configuration:
         class: IDCI\Bundle\CodeGeneratorBundle\Form\Type\CodeGeneratorConfigurationType
         tags:
-            - { name: form_type, alias: code_generator_configuration }
+            - { name: form.type, alias: code_generator_configuration }
