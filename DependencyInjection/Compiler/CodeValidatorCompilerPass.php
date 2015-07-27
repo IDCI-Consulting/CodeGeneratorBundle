@@ -15,17 +15,12 @@ class CodeValidatorCompilerPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container)
     {
-        if (!$container->hasDefinition('idci_code_generator.code_validator_registry')) {
+        if (!$container->hasDefinition('idci_code_generator.validator_registry')) {
             return;
         }
 
-        $registryDefinition = $container->getDefinition(
-            'idci_code_generator.code_validator_registry'
-        );
-
-        $taggedServices = $container->findTaggedServiceIds(
-            'code_validator'
-        );
+        $registryDefinition = $container->getDefinition('idci_code_generator.validator_registry');
+        $taggedServices = $container->findTaggedServiceIds('code_validator');
 
         foreach ($taggedServices as $id => $tagAttributes) {
             foreach ($tagAttributes as $attributes) {

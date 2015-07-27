@@ -15,17 +15,12 @@ class CodeGeneratorCompilerPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container)
     {
-        if (!$container->hasDefinition('idci_code_generator.code_generator_registry')) {
+        if (!$container->hasDefinition('idci_code_generator.generator_registry')) {
             return;
         }
 
-        $registryDefinition = $container->getDefinition(
-            'idci_code_generator.code_generator_registry'
-        );
-
-        $taggedServices = $container->findTaggedServiceIds(
-            'code_generator'
-        );
+        $registryDefinition = $container->getDefinition('idci_code_generator.generator_registry');
+        $taggedServices = $container->findTaggedServiceIds('code_generator');
 
         foreach ($taggedServices as $id => $tagAttributes) {
             foreach ($tagAttributes as $attributes) {

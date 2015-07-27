@@ -13,6 +13,7 @@ use IDCI\Bundle\CodeGeneratorBundle\Model\GenerationConfiguration;
 use IDCI\Bundle\CodeGeneratorBundle\Model\GenerationConfigurationIncludedCharacterSets;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -26,7 +27,18 @@ class GenerateCodesCommand extends ContainerAwareCommand
         $this
             ->setName('idci:code-generator:generate')
             ->setDescription('Generate unique codes')
-            ->addArgument('quantity', InputArgument::REQUIRED, 'How many code do you want to generate')
+            ->addArgument('quantity', InputArgument::REQUIRED, 'The code quantity to generate')
+            ->addOption('generator', 'g', InputOption::VALUE_REQUIRED, 'The generator alias used to the code generation', 'random')
+            ->setHelp(<<<EOT
+The <info>%command.name%</info> command.
+
+Here is an example to generate 100 codes:
+<info>php app/console %command.name% 100</info>
+
+To use a 'custom' generation strategy:
+<info>php app/console %command.name% 100 [--generator|-g="custom"]</info>
+EOT
+            )
         ;
     }
 
@@ -35,46 +47,26 @@ class GenerateCodesCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $quantity = $input->getArgument('quantity');
+        $timeStart = microtime(true);
+        $configuration = new GenerationConfiguration();
 
-        $configuration = $this->getGenerationConfiguration();
-        $configuration->setQuantity($quantity);
-        $codeGeneratorManager = $this->getContainer()->get('idci_code_generator.manager');
-        $codes = $codeGeneratorManager->generate('mtrand', $configuration);
+        $quantity       = $input->getArgument('quantity');
+        $generatorAlias = $input->getOption('generator');
 
+        $codes = $this
+            ->getContainer()
+            ->get('idci_code_generator.manager')
+            ->generate($quantity, $configuration, $generatorAlias)
+        ;
         $output->writeln($codes);
-    }
 
-    /**
-     * Get the generationConfiguration
-     *
-     * @return GenerationConfiguration
-     */
-    private function getGenerationConfiguration()
-    {
-        $generationConfiguration = new GenerationConfiguration();
+        $timeEnd = microtime(true);
+        $time = $timeEnd - $timeStart;
 
-        $includedCharacterSets = new GenerationConfigurationIncludedCharacterSets();
-
-        $includedCharacterSets
-            ->setUppercase(true)
-            ->setLowercase(true)
-            ->setDigits(true)
-            ->setBrackets(false)
-            ->setExtraCharacters(array())
-            ->setPunctuation(false)
-            ->setSpace(false)
-            ->setSpecialCharacters(false)
-        ;
-
-        $generationConfiguration
-            ->setMinLength(5)
-            ->setMaxLength(8)
-            ->setQuantity(15000)
-            ->setExcludedCharacterSets(array())
-            ->setIncludedCharacterSets($includedCharacterSets)
-        ;
-
-        return $generationConfiguration;
+        $output->writeln(sprintf(
+            '<info>Generation done: %d code(s) generated in %0.2f second(s)</info>',
+            $quantity,
+            $time
+        ));
     }
 }
