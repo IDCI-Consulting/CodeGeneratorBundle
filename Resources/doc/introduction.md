@@ -5,31 +5,42 @@ This bundle is useful to generate unique codes according to a configuration.
 First you need to define the configuration.
 
 ```php
-$generationConfiguration = new GenerationConfiguration();
+$configuration = new GenerationConfiguration();
 
-$includedCharacterSets = new GenerationConfigurationIncludedCharacterSets();
-$includedCharacterSets
-    ->setUppercase(true)
+// Theses are the default values, no need to set them again
+$configuration
+    ->setMinLength(4)
+    ->setMaxLength(8)
     ->setLowercase(true)
+    ->setUppercase(true)
     ->setDigits(true)
+    ->setPunctuation(true)
     ->setBrackets(false)
-    ->setExtraCharacters(array())
-    ->setPunctuation(false)
     ->setSpace(false)
     ->setSpecialCharacters(false)
-;
-
-$generationConfiguration
-    ->setMinLength(5)
-    ->setMaxLength(8)
-    ->setQuantity(5000)
-    ->setExcludedCharacterSets(array())
-    ->setIncludedCharacterSets($includedCharacterSets)
+    ->setExtraCharacters(array())
+    ->setExcludedCharacters(array())
 ;
 ```
 
-The includedCharacterSets object allows you to specify which characters you want to include in your codes.
-The characters for each sets can be over written in the config.yml file.
+Then you can generates the codes by using the `idci.code_generator.manager`.
+You can override the default quantity, configuration and generation strategy.
+ * See the [generators](https://github.com/IDCI-Consulting/CodeGeneratorBundle/blob/master/Resources/doc/generators.md)
+part to learn how to add you own generation strategy.
+ * See the [validators](https://github.com/IDCI-Consulting/CodeGeneratorBundle/blob/master/Resources/doc/validators.md)
+part to learn how to add a validator.
+
+```php
+$generatorAlias = 'random';
+$validators = array();
+$codes = $this
+    ->getContainer()
+    ->get('idci_code_generator.manager')
+    ->generate(60, $configuration, $generatorAlias, $validators)
+;
+```
+
+The characters for each sets can be overwritten in the config.yml file.
 
 ```yml
 # Theses are the default values, no need to set them again
@@ -42,12 +53,4 @@ idci_code_generator:
         brackets: '{}[]()'
         space: ' '
         special_characters: ''
-```
-
-Then you can generates the codes by using the `idci.code_generator_manager`.
-You need to pass the generation strategy as well as the configuration.
-
-```php
-$codeGenerator = $this->getContainer()->get('idci.code_generator_manager');
-$codes = $codeGenerator->generate('code_generator_mtrand', $configuration);
 ```

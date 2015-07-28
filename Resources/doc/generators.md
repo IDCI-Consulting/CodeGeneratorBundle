@@ -1,8 +1,8 @@
 Generators
 ==========
 
-TODO (What is a generator)
-
+By adding you own generator, you can change the logic behind the code generation.  
+In other words, you can choose the algorithm you want to generate codes from a given configuration.
 
 Add a generator
 ---------------
@@ -10,7 +10,7 @@ Add a generator
 Add a class that implements CodeGeneratorInterface:
 
 ```php
-use IDCI\Bundle\CodeGeneratorBundle\CodeGenerator\CodeGeneratorInterface;
+use IDCI\Bundle\CodeGeneratorBundle\Generation\CodeGeneratorInterface;
 
 class MyCustomCodeGenerator implements CodeGeneratorInterface
 {
@@ -36,9 +36,12 @@ acme.code_generator.custom:
         - { name: code_generator, alias: code_generator_custom }
 ```
 
-Now you can use your strategy this way:
+Now you can use your new generator:
 
 ```php
-$codeGeneratorManager = $this->getContainer()->get('idci.code_generator_manager');
-$codes = $codeGeneratorManager->generate('code_generator_custom', $configuration);
+$codes = $this
+    ->getContainer()
+    ->get('idci_code_generator.manager')
+    ->generate(50, $configuration, 'code_generator_custom')
+;
 ```
