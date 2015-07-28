@@ -8,7 +8,6 @@ Add a class that implements CodeValidatorInterface:
 
 ```php
 use IDCI\Bundle\CodeGeneratorBundle\Validation\CodeValidatorInterface;
-use IDCI\Bundle\CodeGeneratorBundle\Validation\CodeValidatorContext;
 
 class MyCustomCodeValidator implements CodeValidatorInterface
 {
