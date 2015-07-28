@@ -29,10 +29,10 @@ class MyCustomCodeValidator implements CodeValidatorInterface
 Then register this class as a service with the 'code_validator' tag.
 
 ```yml
-idci_code_generator.validator.unique_in_codespace:
+idci_code_generator.validator.my_custom_validator:
     class: Tms\Bundle\CodeBundle\Validation\MyCustomCodeValidator
     tags:
-        - { name: code_validator, alias: code_validator_custom }
+        - { name: code_validator, alias: my_custom_validator }
 ```
 
 Now you can use your new validator:
