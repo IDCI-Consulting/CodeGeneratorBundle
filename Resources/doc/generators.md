@@ -11,6 +11,7 @@ Add a class that implements CodeGeneratorInterface:
 
 ```php
 use IDCI\Bundle\CodeGeneratorBundle\Generation\CodeGeneratorInterface;
+use IDCI\Bundle\CodeGeneratorBundle\Configuration\CodeGeneratorConfigurator;
 
 class MyCustomCodeGenerator implements CodeGeneratorInterface
 {
