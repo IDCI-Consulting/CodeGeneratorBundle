@@ -31,10 +31,10 @@ class MyCustomCodeGenerator implements CodeGeneratorInterface
 Then register that class as a service with the 'code_generator' tag.
 
 ```yml
-acme.code_generator.custom:
-    class: Acme\Bundle\YourBundle\CodeGenerator\MyCustomCodeGenerator
+idci_code_generator.generator.my_custom_generator:
+    class: Tms\Bundle\CodeBundle\Generation\MyCustomCodeGenerator
     tags:
-        - { name: code_generator, alias: code_generator_custom }
+        - { name: code_generator, alias: my_custom_generator }
 ```
 
 Now you can use your new generator:
