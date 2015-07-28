@@ -58,24 +58,27 @@ class CodeGeneratorConfigurator
         }
 
         // Add extra characters
-        foreach ($this->configuration->getExtraCharacters() as $character) {
-            if (mb_strlen($character) !== 1) {
-                throw new \RuntimeException(sprintf('The extra character `%s` is invalid ', $character));
-            }
+        if (null !== $this->configuration->getExtraCharacters()) {
+            foreach (str_split($this->configuration->getExtraCharacters()) as $character) {
+                if (mb_strlen($character) !== 1) {
+                    throw new \RuntimeException(sprintf('The extra character `%s` is invalid ', $character));
+                }
 
-            if (false === strpos($fullCharset, $character)) {
-                $fullCharacters .= $character;
+                if (false === strpos($fullCharset, $character)) {
+                    $fullCharacters .= $character;
+                }
             }
         }
 
         // Remove excluded characters
-        $excludedCharacters = $this->configuration->getExcludedCharacters();
-        foreach ($this->configuration->getExcludedCharacters() as $character) {
-            if (mb_strlen($character) !== 1) {
-                throw new \RuntimeException(sprintf('The excluded character `%s` is invalid ', $character));
-            }
+        if (null !== $this->configuration->getExcludedCharacters()) {
+            foreach (str_split($this->configuration->getExcludedCharacters()) as $character) {
+                if (mb_strlen($character) !== 1) {
+                    throw new \RuntimeException(sprintf('The excluded character `%s` is invalid ', $character));
+                }
 
-            $fullCharacters = str_replace($character, '', $fullCharacters);
+                $fullCharacters = str_replace($character, '', $fullCharacters);
+            }
         }
 
         return $fullCharacters;

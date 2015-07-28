@@ -28,7 +28,7 @@ class RandomCodeGeneratorTest extends \PHPUnit_Framework_TestCase
             'punctuation'       => ',?!:;.',
             'uppercase'         => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
             'space'             => ' ',
-            'specialCharacters' => array(),
+            'specialCharacters' => '',
         );
     }
 
@@ -73,8 +73,8 @@ class RandomCodeGeneratorTest extends \PHPUnit_Framework_TestCase
             ->setBrackets(false)
             ->setSpace(false)
             ->setSpecialCharacters(false)
-            ->setExtraCharacters(array())
-            ->setExcludedCharacters(array())
+            ->setExtraCharacters(null)
+            ->setExcludedCharacters(null)
         ;
         $configurator = new CodeGeneratorConfigurator($configuration, $this->getCharsets());
 

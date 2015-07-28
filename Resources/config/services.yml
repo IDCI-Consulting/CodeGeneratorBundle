@@ -31,6 +31,18 @@ services:
 
 
     # Form
+    form.type.code_generator_choice:
+        class: IDCI\Bundle\CodeGeneratorBundle\Form\Type\CodeGeneratorChoiceType
+        arguments: [@idci_code_generator.generator_registry]
+        tags:
+            - { name: form.type, alias: code_generator_choice }
+
+    form.type.code_validator_choice:
+        class: IDCI\Bundle\CodeGeneratorBundle\Form\Type\CodeValidatorChoiceType
+        arguments: [@idci_code_generator.validator_registry]
+        tags:
+            - { name: form.type, alias: code_validator_choice }
+
     form.type.code_generation_configuration:
         class: IDCI\Bundle\CodeGeneratorBundle\Form\Type\GenerationConfigurationType
         arguments: [%idci_code_generator.charsets%]

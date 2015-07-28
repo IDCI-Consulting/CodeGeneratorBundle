@@ -8,6 +8,8 @@
 
 namespace IDCI\Bundle\CodeGeneratorBundle\Model;
 
+use IDCI\Bundle\CodeGeneratorBundle\Exception\UnexpectedTypeException;
+
 class GenerationConfiguration
 {
     /**
@@ -72,12 +74,12 @@ class GenerationConfiguration
     /**
      * Extra characters.
      *
-     * @var array()
+     * @var string
      */
     private $extraCharacters;
 
     /**
-     * @var array()
+     * @var string
      */
     private $excludedCharacters;
 
@@ -96,8 +98,8 @@ class GenerationConfiguration
             ->setBrackets(false)
             ->setSpace(false)
             ->setSpecialCharacters(false)
-            ->setExtraCharacters(array())
-            ->setExcludedCharacters(array())
+            ->setExtraCharacters(null)
+            ->setExcludedCharacters(null)
         ;
     }
 
@@ -320,7 +322,7 @@ class GenerationConfiguration
     /**
      * Get extra characters.
      *
-     * @return array
+     * @return string
      */
     public function getExtraCharacters()
     {
@@ -330,12 +332,16 @@ class GenerationConfiguration
     /**
      * Set extra characters.
      *
-     * @param array $extraCharacters
+     * @param string $extraCharacters
      *
      * @return GenerationConfiguration
      */
-    public function setExtraCharacters(array $extraCharacters)
+    public function setExtraCharacters($extraCharacters)
     {
+        if (null !== $extraCharacters && !is_string($extraCharacters)) {
+            throw new UnexpectedTypeException($extraCharacters, 'string');
+        }
+
         $this->extraCharacters = $extraCharacters;
 
         return $this;
@@ -344,7 +350,7 @@ class GenerationConfiguration
     /**
      * Get excluded characters.
      *
-     * @return array
+     * @return string
      */
     public function getExcludedCharacters()
     {
@@ -354,12 +360,16 @@ class GenerationConfiguration
     /**
      * Set excluded characters.
      *
-     * @param array $excludedCharacters
+     * @param string $excludedCharacters
      *
      * @return GenerationConfiguration
      */
     public function setExcludedCharacters($excludedCharacters)
     {
+        if (null !== $excludedCharacters && !is_string($excludedCharacters)) {
+            throw new UnexpectedTypeException($excludedCharacters, 'string');
+        }
+
         $this->excludedCharacters = $excludedCharacters;
 
         return $this;

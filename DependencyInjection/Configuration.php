@@ -37,7 +37,9 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('punctuation')->defaultValue(',?!:;.')->cannotBeEmpty()->end()
                         ->scalarNode('brackets')->defaultValue('{}[]()')->cannotBeEmpty()->end()
                         ->scalarNode('space')->defaultValue(' ')->cannotBeEmpty()->end()
-                        ->scalarNode('special_characters')->cannotBeEmpty()->end()
+                        ->scalarNode('special_characters')->defaultValue('')->end()
+                        ->scalarNode('extra_characters')->defaultValue('')->end()
+                        ->scalarNode('excluded_characters')->defaultValue('')->end()
                     ->end()
             ->end()
         ;

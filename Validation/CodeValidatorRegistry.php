@@ -15,7 +15,7 @@ class CodeValidatorRegistry implements CodeValidatorRegistryInterface
     /**
      * @var array
      */
-    protected $codeValidators;
+    protected $codeValidators = array();
 
     /**
      * {@inheritDoc}

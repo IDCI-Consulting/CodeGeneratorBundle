@@ -37,22 +37,24 @@ class GenerationConfigurationType extends AbstractType
             ->add('minLength', 'integer')
             ->add('maxLength', 'integer')
             ->add('lowercase', 'checkbox', array(
-                'label' => sprintf('Lowercase ("%s")', $this->charsets['lowercase'])
+                'label' => sprintf('Lowercase: %s', $this->charsets['lowercase'])
             ))
             ->add('uppercase', 'checkbox', array(
-                'label' => sprintf('Uppercase ("%s")', $this->charsets['uppercase'])
+                'label' => sprintf('Uppercase: %s', $this->charsets['uppercase'])
             ))
             ->add('digits', 'checkbox', array(
-                'label' => sprintf('Digits ("%s")', $this->charsets['digits'])
+                'label' => sprintf('Digits: %s', $this->charsets['digits'])
             ))
             ->add('punctuation', 'checkbox', array(
-                'label' => sprintf('Punctuation ("%s")', $this->charsets['punctuation'])
+                'label' => sprintf('Punctuation: %s', $this->charsets['punctuation'])
             ))
             ->add('brackets', 'checkbox', array(
-                'label' => sprintf('Brackets ("%s")', $this->charsets['brackets'])
+                'label' => sprintf('Brackets: %s', $this->charsets['brackets'])
             ))
             ->add('space', 'checkbox')
-            ->add('specialCharacters', 'text')
+            ->add('specialCharacters', 'checkbox', array(
+                'label' => sprintf('Special characters: %s', $this->charsets['special_characters'])
+            ))
             ->add('extraCharacters', 'text')
             ->add('excludedCharacters', 'text')
         ;

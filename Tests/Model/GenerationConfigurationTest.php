@@ -20,15 +20,15 @@ class GenerationConfigurationTest extends \PHPUnit_Framework_TestCase
     {
         $configuration = new GenerationConfiguration();
 
-        $this->assertEquals(4,       $configuration->getMinLength());
-        $this->assertEquals(8,       $configuration->getMaxLength());
-        $this->assertEquals(true,    $configuration->isLowercase());
-        $this->assertEquals(true,    $configuration->isUppercase());
-        $this->assertEquals(true,    $configuration->isDigits());
-        $this->assertEquals(true,    $configuration->isPunctuation());
-        $this->assertEquals(false,   $configuration->isBrackets());
-        $this->assertEquals(false,   $configuration->isSpace());
-        $this->assertEquals(false,   $configuration->isSpecialCharacters());
-        $this->assertEquals(array(), $configuration->getExtraCharacters());
+        $this->assertEquals(4,     $configuration->getMinLength());
+        $this->assertEquals(8,     $configuration->getMaxLength());
+        $this->assertEquals(true,  $configuration->isLowercase());
+        $this->assertEquals(true,  $configuration->isUppercase());
+        $this->assertEquals(true,  $configuration->isDigits());
+        $this->assertEquals(true,  $configuration->isPunctuation());
+        $this->assertEquals(false, $configuration->isBrackets());
+        $this->assertEquals(false, $configuration->isSpace());
+        $this->assertEquals(false, $configuration->isSpecialCharacters());
+        $this->assertEquals(null,  $configuration->getExtraCharacters());
     }
 }

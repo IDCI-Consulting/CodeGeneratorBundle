@@ -28,7 +28,7 @@ class CodeGeneratorConfiguratorBuilderTest extends \PHPUnit_Framework_TestCase
             'punctuation'       => ',?!:;.',
             'uppercase'         => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
             'space'             => ' ',
-            'specialCharacters' => array(),
+            'specialCharacters' => '',
         );
     }
 

@@ -15,7 +15,7 @@ class CodeGeneratorRegistry implements CodeGeneratorRegistryInterface
     /**
      * @var array
      */
-    protected $codeGenerators;
+    protected $codeGenerators = array();
 
     /**
      * {@inheritdoc}
