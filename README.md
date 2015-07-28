@@ -63,16 +63,3 @@ $ php composer.phar update
 To execute unit tests:
 ```sh
 $ phpunit --coverage-text
-
-
-Todo
-----
-
-Rename:
-CodeGenerator -> Generation
-CodeGeneratorConfigurator -> Configuration
-CodeValidator -> Validation
-
-End the documentations !
-
-Add UML Schema (display them in architecture.md).
