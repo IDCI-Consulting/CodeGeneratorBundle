@@ -18,8 +18,8 @@ $configuration
     ->setBrackets(false)
     ->setSpace(false)
     ->setSpecialCharacters(false)
-    ->setExtraCharacters(array())
-    ->setExcludedCharacters(array())
+    ->setExtraCharacters(null)
+    ->setExcludedCharacters(null)
 ;
 ```
 
