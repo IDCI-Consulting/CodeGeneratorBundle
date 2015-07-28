@@ -25,9 +25,9 @@ $configuration
 
 Then you can generates the codes by using the `idci.code_generator.manager`.
 You can override the default quantity, configuration and generation strategy.
- * See the [generators](https://github.com/IDCI-Consulting/CodeGeneratorBundle/blob/master/Resources/doc/generators.md)
+ * See the [generators](Resources/doc/generators.md)
 part to learn how to add you own generation strategy.
- * See the [validators](https://github.com/IDCI-Consulting/CodeGeneratorBundle/blob/master/Resources/doc/validators.md)
+ * See the [validators](Resources/doc/validators.md)
 part to learn how to add a validator.
 
 ```php
