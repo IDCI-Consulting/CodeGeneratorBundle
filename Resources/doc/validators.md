@@ -29,8 +29,8 @@ class MyCustomCodeValidator implements CodeValidatorInterface
 Then register this class as a service with the 'code_validator' tag.
 
 ```yml
-acme.code_validator.custom:
-    class: Acme\Bundle\YourBundle\CodeValidator\MyCustomCodeValidator
+idci_code_generator.validator.unique_in_codespace:
+    class: Tms\Bundle\CodeBundle\Validation\MyCustomCodeValidator
     tags:
         - { name: code_validator, alias: code_validator_custom }
 ```
