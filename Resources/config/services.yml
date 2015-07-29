@@ -31,6 +31,11 @@ services:
 
 
     # Form
+    form.type.json_textarea:
+        class: IDCI\Bundle\CodeGeneratorBundle\Form\Type\JsonTextareaType
+        tags:
+            - { name: form.type, alias: json_textarea }
+
     form.type.code_generator_choice:
         class: IDCI\Bundle\CodeGeneratorBundle\Form\Type\CodeGeneratorChoiceType
         arguments: [@idci_code_generator.generator_registry]
@@ -42,6 +47,11 @@ services:
         arguments: [@idci_code_generator.validator_registry]
         tags:
             - { name: form.type, alias: code_validator_choice }
+
+    form.type.code_validator:
+        class: IDCI\Bundle\CodeGeneratorBundle\Form\Type\CodeValidatorType
+        tags:
+            - { name: form.type, alias: code_validator }
 
     form.type.code_generation_configuration:
         class: IDCI\Bundle\CodeGeneratorBundle\Form\Type\GenerationConfigurationType

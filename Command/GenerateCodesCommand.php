@@ -58,6 +58,7 @@ EOT
             ->get('idci_code_generator.manager')
             ->generate($quantity, $configuration, $generatorAlias)
         ;
+
         $output->writeln($codes);
 
         $timeEnd = microtime(true);

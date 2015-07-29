@@ -8,6 +8,7 @@
 
 namespace IDCI\Bundle\CodeGeneratorBundle;
 
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use IDCI\Bundle\CodeGeneratorBundle\Configuration\CodeGeneratorConfiguratorBuilderInterface;
 use IDCI\Bundle\CodeGeneratorBundle\Generation\CodeGeneratorRegistryInterface;
 use IDCI\Bundle\CodeGeneratorBundle\Validation\CodeValidatorRegistryInterface;
@@ -55,7 +56,7 @@ class CodeGeneratorManager
      * @param integer                 $quantity         The quantity of codes to generate.
      * @param GenerationConfiguration $configuration    The generation configuration.
      * @param string                  $generatorAlias   The generator alias to use.
-     * @param array                   $validatorAliases The validators aliases to use.
+     * @param array                   $validators       The validators to use.
      *
      * @return array $codes The generated codes.
      *
@@ -65,7 +66,7 @@ class CodeGeneratorManager
         $quantity = 42,
         GenerationConfiguration $configuration = null,
         $generatorAlias = 'random',
-        array $validatorAliases = array())
+        array $validators = array())
     {
         $configuration = null === $configuration ?
             new GenerationConfiguration() :
@@ -98,13 +99,13 @@ class CodeGeneratorManager
 
             // Do not allow same generated codes
             if (
-                in_array($code, $codes) ||
-                !$this->isCodeValid($code, $validatorAliases)
+                isset($codes[$code]) ||
+                !$this->isCodeValid($code, $validators)
             ) {
                 continue;
             }
 
-            $codes[] = $code;
+            $codes[$code] = $code;
         }
 
         return $codes;
@@ -113,19 +114,20 @@ class CodeGeneratorManager
     /**
      * Returns whether the given code is valid or not
      *
-     * @param string $code             The code to validate.
-     * @param array  $validatorAliases The validators aliases to use.
+     * @param string $code       The code to validate.
+     * @param array  $validators The validators to use.
      *
      * @return boolean
      */
-    protected function isCodeValid($code, array $validatorAliases = array())
+    protected function isCodeValid($code, array $validators = array())
     {
-        foreach ($validatorAliases as $validatorAlias) {
-            if (!$this
-                ->codeValidatorRegistry
-                ->getCodeValidator($validatorAlias)
-                ->validate($code)
-            ) {
+        foreach ($validators as $alias => $options) {
+            $validator = $this->validatorRegistry->getCodeValidator($alias);
+            $resolver = new OptionsResolver();
+            $validator->setDefaultOptions($resolver);
+            $resolvedOptions = $resolver->resolve($options);
+
+            if (!$validator->validate($code, $resolvedOptions)) {
                 return false;
             }
         }

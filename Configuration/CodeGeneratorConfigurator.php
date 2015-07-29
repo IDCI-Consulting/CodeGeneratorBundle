@@ -64,7 +64,7 @@ class CodeGeneratorConfigurator
                     throw new \RuntimeException(sprintf('The extra character `%s` is invalid ', $character));
                 }
 
-                if (false === strpos($fullCharset, $character)) {
+                if (false === strpos($fullCharacters, $character)) {
                     $fullCharacters .= $character;
                 }
             }
