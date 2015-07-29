@@ -28,15 +28,27 @@ class GenerateCodesCommand extends ContainerAwareCommand
             ->setName('idci:code-generator:generate')
             ->setDescription('Generate unique codes')
             ->addArgument('quantity', InputArgument::REQUIRED, 'The code quantity to generate')
+            ->addOption('configuration', 'c', InputOption::VALUE_REQUIRED, 'The generation configuration', null)
             ->addOption('generator', 'g', InputOption::VALUE_REQUIRED, 'The generator alias used to the code generation', 'random')
+            ->addOption('validators', 'd', InputOption::VALUE_REQUIRED, 'The validators to used during code generation', null)
+            ->addOption('output', 'o', InputOption::VALUE_REQUIRED, 'The output file path', null)
             ->setHelp(<<<EOT
 The <info>%command.name%</info> command.
 
 Here is an example to generate 100 codes:
 <info>php app/console %command.name% 100</info>
 
+Here is a complete example with a custom generation configuration to generate 1000 codes:
+<info>php app/console %command.name% --configuration|-c '{"minLength":6, "maxLength":8, "lowercase":true, "uppercase":false, "digits":false, "punctuation":false, "brackets":false, "space":false, "excludedCharacters":"oO0uUvV"}' 1000</info>
+
 To use a 'custom' generation strategy:
-<info>php app/console %command.name% 100 [--generator|-g="custom"]</info>
+<info>php app/console %command.name% 100 --generator|-g 'custom'</info>
+
+To use 'custom' validators strategies:
+<info>php app/console %command.name% 100 --validators|-d '{"validatorAlias":{"opt1": "x", "opt2": "y"}}'</info>
+
+If you wish to store codes in a file:
+<info>php app/console %command.name% 100 --output|-o '/path/to/file'</info>
 EOT
             )
         ;
@@ -52,14 +64,18 @@ EOT
 
         $quantity       = $input->getArgument('quantity');
         $generatorAlias = $input->getOption('generator');
+        $validators     = null === $input->getOption('validators') ?
+            array() :
+            json_decode($input->getOption('validators'), true)
+        ;
+
+        $this->setupConfiguration($configuration, $input->getOption('configuration'));
 
         $codes = $this
             ->getContainer()
             ->get('idci_code_generator.manager')
-            ->generate($quantity, $configuration, $generatorAlias)
+            ->generate($quantity, $configuration, $generatorAlias, $validators)
         ;
-
-        $output->writeln($codes);
 
         $timeEnd = microtime(true);
         $time = $timeEnd - $timeStart;
@@ -69,5 +85,56 @@ EOT
             $quantity,
             $time
         ));
+
+        if (null === $input->getOption('output')) {
+            return 0;
+        }
+
+        $filepath = $input->getOption('output');
+        if (!$handle = fopen($filepath, 'a')) {
+            $output->writeln(sprintf(
+                '<error>Could not open the file: %s</error>',
+                $filepath
+            ));
+
+            return 1;
+        }
+
+        foreach ($codes as $code) {
+            if (fwrite($handle, $code."\n") === FALSE) {
+                $output->writeln(sprintf(
+                    '<error>Could not write into the file: %s</error>',
+                    $filepath
+                ));
+            }
+        }
+
+        fclose($handle);
+
+        $output->writeln(sprintf('<info>Codes writes in %s</info>', $filepath));
+    }
+
+    /**
+     * Setup the configuration
+     *
+     * @param GenerationConfiguration $configuration
+     * @param string                  $options
+     */
+    protected function setupConfiguration(GenerationConfiguration $configuration, $options)
+    {
+        if (null === $options) {
+            return false;
+        }
+
+        $reflector = new \ReflectionClass($configuration);
+        foreach (json_decode($options, true) as $key => $value) {
+            $setter = sprintf("set%s", ucfirst($key));
+            if ($reflector->hasMethod($setter)) {
+                call_user_func(
+                    array($configuration, $setter),
+                    $value
+                );
+            }
+        }
     }
 }
