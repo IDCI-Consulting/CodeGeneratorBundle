@@ -29,6 +29,10 @@ services:
     idci_code_generator.validator_registry:
         class: IDCI\Bundle\CodeGeneratorBundle\Validation\CodeValidatorRegistry
 
+    idci_code_generator.validator.none:
+        class: IDCI\Bundle\CodeGeneratorBundle\Validation\NoCodeValidator
+        tags:
+            - { name: code_validator, alias: none }
 
     # Form
     form.type.json_textarea:

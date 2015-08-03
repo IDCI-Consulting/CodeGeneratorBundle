@@ -20,8 +20,12 @@ class CodeValidatorType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('alias', 'code_validator_choice')
-            ->add('options', 'json_textarea')
+            ->add('alias', 'code_validator_choice', array(
+                'required' => false,
+            ))
+            ->add('options', 'json_textarea', array(
+                'required' => false,
+            ))
         ;
     }
 

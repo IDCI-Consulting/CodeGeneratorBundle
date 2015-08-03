@@ -41,7 +41,11 @@ class CodeValidatorChoiceType extends AbstractType
             $choices[$alias] = $alias;
         }
 
-        $resolver->setDefaults(array('choices' => $choices));
+        $resolver
+            ->setDefaults(array(
+                'choices'    => $choices,
+                'empty_data' => 'none'
+            ));
     }
 
     /**

@@ -29,6 +29,8 @@ class JsonToArrayTransformer implements DataTransformerInterface
      */
     public function reverseTransform($value)
     {
-        return json_decode($value, true);
+        $reverse = json_decode($value, true);
+
+        return is_array($reverse) ? $reverse : array();
     }
 }
