@@ -7,7 +7,7 @@
 
 namespace IDCI\Bundle\CodeGeneratorBundle\Validation;
 
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use IDCI\Bundle\CodeGeneratorBundle\Validation\CodeValidatorInterface;
 
 class NoCodeValidator implements CodeValidatorInterface
@@ -15,7 +15,7 @@ class NoCodeValidator implements CodeValidatorInterface
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function setDefaultOptions(OptionsResolver $resolver)
     {
         $resolver;
     }

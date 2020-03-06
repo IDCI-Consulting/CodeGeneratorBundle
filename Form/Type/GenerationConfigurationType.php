@@ -9,6 +9,7 @@ namespace IDCI\Bundle\CodeGeneratorBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Form\Extension\Core\Type as Types;
 
@@ -46,7 +47,7 @@ class GenerationConfigurationType extends AbstractType
             ->add('digits', Types\CheckboxType::class, array(
                 'label' => sprintf('Digits: %s', $this->charsets['digits'])
             ))
-            ->add('punctuation', 'checkbox', array(
+            ->add('punctuation', Types\CheckboxType::class, array(
                 'label' => sprintf('Punctuation: %s', $this->charsets['punctuation'])
             ))
             ->add('brackets', Types\CheckboxType::class, array(
@@ -62,13 +63,21 @@ class GenerationConfigurationType extends AbstractType
     }
 
     /**
-     * {@inheritdoc}
-     */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    * {@inheritdoc}
+    */
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'data_class' => 'IDCI\Bundle\CodeGeneratorBundle\Model\GenerationConfiguration'
         ));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $this->configureOptions($resolver);
     }
 
     /**

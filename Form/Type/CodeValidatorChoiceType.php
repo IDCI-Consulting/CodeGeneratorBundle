@@ -12,6 +12,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type as Types;
 use Symfony\Component\OptionsResolver\Options;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class CodeValidatorChoiceType extends AbstractType
@@ -32,9 +33,9 @@ class CodeValidatorChoiceType extends AbstractType
     }
 
     /**
-     * {@inheritdoc}
-     */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    * {@inheritdoc}
+    */
+    public function configureOptions(OptionsResolver $resolver)
     {
         $choices = array();
 
@@ -46,7 +47,16 @@ class CodeValidatorChoiceType extends AbstractType
             ->setDefaults(array(
                 'choices'    => $choices,
                 'empty_data' => 'none'
-            ));
+            ))
+        ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $this->configureOptions($resolver);
     }
 
     /**

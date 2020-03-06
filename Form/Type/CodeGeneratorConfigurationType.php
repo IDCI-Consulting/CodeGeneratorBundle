@@ -7,7 +7,7 @@
 
 namespace IDCI\Bundle\CodeGeneratorBundle\Form\Type;
 
-use IDCI\Bundle\CodeGeneratorBundle\Form\GenerationConfigurationType;
+use IDCI\Bundle\CodeGeneratorBundle\Form\Type\GenerationConfigurationType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type as Types;

@@ -12,6 +12,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type as Types;
 use Symfony\Component\OptionsResolver\Options;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class CodeGeneratorChoiceType extends AbstractType
@@ -32,9 +33,9 @@ class CodeGeneratorChoiceType extends AbstractType
     }
 
     /**
-     * {@inheritdoc}
-     */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    * {@inheritdoc}
+    */
+    public function configureOptions(OptionsResolver $resolver)
     {
         $choices = array();
 
@@ -43,6 +44,14 @@ class CodeGeneratorChoiceType extends AbstractType
         }
 
         $resolver->setDefaults(array('choices' => $choices));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $this->configureOptions($resolver);
     }
 
     /**

@@ -8,16 +8,16 @@
 
 namespace IDCI\Bundle\CodeGeneratorBundle\Validation;
 
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 interface CodeValidatorInterface
 {
     /**
      * Sets the default options.
      *
-     * @param OptionsResolverInterface $resolver The options resolver.
+     * @param OptionsResolver $resolver The options resolver.
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver);
+    public function setDefaultOptions(OptionsResolver $resolver);
 
     /**
      * Validate a code.
