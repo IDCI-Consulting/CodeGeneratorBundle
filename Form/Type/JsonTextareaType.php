@@ -7,9 +7,10 @@
 
 namespace IDCI\Bundle\CodeGeneratorBundle\Form\Type;
 
+use IDCI\Bundle\CodeGeneratorBundle\Form\DataTransformer\JsonToArrayTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use IDCI\Bundle\CodeGeneratorBundle\Form\DataTransformer\JsonToArrayTransformer;
+use Symfony\Component\Form\Extension\Core\Type as Types;
 
 class JsonTextareaType extends AbstractType
 {
@@ -26,7 +27,15 @@ class JsonTextareaType extends AbstractType
      */
     public function getParent()
     {
-        return 'textarea';
+        return Types\TextareaType::class;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'json_textarea';
     }
 
     /**
@@ -34,6 +43,6 @@ class JsonTextareaType extends AbstractType
      */
     public function getName()
     {
-        return 'json_textarea';
+        return $this->getBlockPrefix();
     }
 }

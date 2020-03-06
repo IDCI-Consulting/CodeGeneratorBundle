@@ -7,11 +7,12 @@
 
 namespace IDCI\Bundle\CodeGeneratorBundle\Form\Type;
 
+use IDCI\Bundle\CodeGeneratorBundle\Generation\CodeGeneratorRegistryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Form\Extension\Core\Type as Types;
 use Symfony\Component\OptionsResolver\Options;
-use IDCI\Bundle\CodeGeneratorBundle\Generation\CodeGeneratorRegistryInterface;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class CodeGeneratorChoiceType extends AbstractType
 {
@@ -49,7 +50,15 @@ class CodeGeneratorChoiceType extends AbstractType
      */
     public function getParent()
     {
-        return 'choice';
+        return Types\ChoiceType::class;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'code_generator_choice';
     }
 
     /**
@@ -57,6 +66,6 @@ class CodeGeneratorChoiceType extends AbstractType
      */
     public function getName()
     {
-        return 'code_generator_choice';
+        return $this->getBlockPrefix();
     }
 }

@@ -10,6 +10,7 @@ namespace IDCI\Bundle\CodeGeneratorBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Form\Extension\Core\Type as Types;
 
 class GenerationConfigurationType extends AbstractType
 {
@@ -34,29 +35,29 @@ class GenerationConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('minLength', 'integer')
-            ->add('maxLength', 'integer')
-            ->add('lowercase', 'checkbox', array(
+            ->add('minLength', Types\IntegerType::class)
+            ->add('maxLength', Types\IntegerType::class)
+            ->add('lowercase', Types\CheckboxType::class, array(
                 'label' => sprintf('Lowercase: %s', $this->charsets['lowercase'])
             ))
-            ->add('uppercase', 'checkbox', array(
+            ->add('uppercase', Types\CheckboxType::class, array(
                 'label' => sprintf('Uppercase: %s', $this->charsets['uppercase'])
             ))
-            ->add('digits', 'checkbox', array(
+            ->add('digits', Types\CheckboxType::class, array(
                 'label' => sprintf('Digits: %s', $this->charsets['digits'])
             ))
             ->add('punctuation', 'checkbox', array(
                 'label' => sprintf('Punctuation: %s', $this->charsets['punctuation'])
             ))
-            ->add('brackets', 'checkbox', array(
+            ->add('brackets', Types\CheckboxType::class, array(
                 'label' => sprintf('Brackets: %s', $this->charsets['brackets'])
             ))
-            ->add('space', 'checkbox')
-            ->add('specialCharacters', 'checkbox', array(
+            ->add('space', Types\CheckboxType::class)
+            ->add('specialCharacters', Types\CheckboxType::class, array(
                 'label' => sprintf('Special characters: %s', $this->charsets['special_characters'])
             ))
-            ->add('extraCharacters', 'text')
-            ->add('excludedCharacters', 'text')
+            ->add('extraCharacters', Types\TextType::class)
+            ->add('excludedCharacters', Types\TextType::class)
         ;
     }
 
@@ -73,8 +74,16 @@ class GenerationConfigurationType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'code_generation_configuration';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return $this->getBlockPrefix();
     }
 }

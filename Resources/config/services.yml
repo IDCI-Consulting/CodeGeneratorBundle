@@ -4,15 +4,15 @@ services:
     idci_code_generator.manager:
         class: IDCI\Bundle\CodeGeneratorBundle\CodeGeneratorManager
         arguments:
-            - @idci_code_generator.configurator_builder
-            - @idci_code_generator.generator_registry
-            - @idci_code_generator.validator_registry
+            - "@idci_code_generator.configurator_builder"
+            - "@idci_code_generator.generator_registry"
+            - "@idci_code_generator.validator_registry"
 
 
     # Configurator
     idci_code_generator.configurator_builder:
         class: IDCI\Bundle\CodeGeneratorBundle\Configuration\CodeGeneratorConfiguratorBuilder
-        arguments: [%idci_code_generator.charsets%]
+        arguments: ["%idci_code_generator.charsets%"]
 
 
     # Generator
@@ -42,13 +42,13 @@ services:
 
     form.type.code_generator_choice:
         class: IDCI\Bundle\CodeGeneratorBundle\Form\Type\CodeGeneratorChoiceType
-        arguments: [@idci_code_generator.generator_registry]
+        arguments: ["@idci_code_generator.generator_registry"]
         tags:
             - { name: form.type, alias: code_generator_choice }
 
     form.type.code_validator_choice:
         class: IDCI\Bundle\CodeGeneratorBundle\Form\Type\CodeValidatorChoiceType
-        arguments: [@idci_code_generator.validator_registry]
+        arguments: ["@idci_code_generator.validator_registry"]
         tags:
             - { name: form.type, alias: code_validator_choice }
 
@@ -59,7 +59,7 @@ services:
 
     form.type.code_generation_configuration:
         class: IDCI\Bundle\CodeGeneratorBundle\Form\Type\GenerationConfigurationType
-        arguments: [%idci_code_generator.charsets%]
+        arguments: ["%idci_code_generator.charsets%"]
         tags:
             - { name: form.type, alias: code_generation_configuration }
 

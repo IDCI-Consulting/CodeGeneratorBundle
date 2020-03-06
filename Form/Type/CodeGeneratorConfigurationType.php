@@ -7,10 +7,11 @@
 
 namespace IDCI\Bundle\CodeGeneratorBundle\Form\Type;
 
+use IDCI\Bundle\CodeGeneratorBundle\Form\GenerationConfigurationType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\Extension\Core\Type as Types;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use IDCI\Bundle\CodeGeneratorBundle\Form\GenerationConfigurationType;
 
 class CodeGeneratorConfigurationType extends AbstractType
 {
@@ -20,9 +21,17 @@ class CodeGeneratorConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('quantity', 'integer')
-            ->add('configuration', 'code_generation_configuration')
+            ->add('quantity', Types\IntegerType::class)
+            ->add('configuration', GenerationConfigurationType::class)
         ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'code_generator_configuration';
     }
 
     /**
@@ -30,6 +39,6 @@ class CodeGeneratorConfigurationType extends AbstractType
      */
     public function getName()
     {
-        return 'code_generator_configuration';
+        return $this->getBlockPrefix();
     }
 }
